@@ -1,1 +1,36 @@
-<h1>Snake</h1>
+<!DOCTYPE html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		var canvas, ctx;
+		var pixelSize = 8;
+
+		$(function ()
+		{
+			StartGame();
+		});
+
+		function StartGame()
+		{
+			canvas = document.getElementById("SnakeCanvas");
+			ctx = canvas.getContext("2d");
+			DrawPixel({ "X": 10, "Y": 15})
+		}
+
+		function DrawPixel(pos)
+		{
+			ctx.fillStyle = "#FF0000";
+			ctx.fillRect(pos.X * pixelSize, pos.Y * pixelSize, pixelSize, pixelSize);
+		}
+	</script>
+	<style type="text/css">
+		#SnakeCanvas
+		{
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<h1>Snake</h1>
+	<canvas id="SnakeCanvas" width="240" height="240"></canvas>
+</body>
