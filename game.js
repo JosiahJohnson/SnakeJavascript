@@ -13,7 +13,7 @@ class Game
 		this.steps = 0;
 		this.gameOver = false;
 
-		$(this.canvas).mousedown(CanvasClickEvent);
+		$(this.canvas).click(CanvasClickEvent);
 		$(window).keydown(KeyPressed);
 
 		this.DrawPixel(this.apple.Pos, this.apple.Color);
