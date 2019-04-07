@@ -1,3 +1,4 @@
+var boardPixels = 20;
 var game, pixelSize, canvasWidth, canvasHeight;
 const Direction = { "Up": 0, "Down": 1, "Left": 2, "Right": 3 };
 
@@ -16,8 +17,8 @@ function SetBoardSize()
 	if (screenHeight < screenWidth)
 		screenSize = screenHeight;
 
-	pixelSize = parseInt((screenSize / 30) * .9);
-	canvasWidth = pixelSize * 30;
+	pixelSize = parseInt((screenSize / boardPixels) * .9);
+	canvasWidth = pixelSize * boardPixels;
 	canvasHeight = canvasWidth;
 }
 
@@ -47,6 +48,16 @@ function CanvasClickEvent(e)
 		else if (y < snakeY)
 			game.playerInput = Direction.Up;
 	}
+}
 
-	console.log(game.playerInput);
+function KeyPressed(e)
+{
+	if (e.key == "ArrowUp" || e.key == "w")
+		game.playerInput = Direction.Up;
+	else if (e.key == "ArrowDown" || e.key == "s")
+		game.playerInput = Direction.Down;
+	else if (e.key == "ArrowLeft" || e.key == "a")
+		game.playerInput = Direction.Left;
+	else if (e.key == "ArrowRight" || e.key == "d")
+		game.playerInput = Direction.Right;
 }

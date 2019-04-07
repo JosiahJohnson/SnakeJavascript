@@ -7,13 +7,16 @@ class Game
 		this.canvas.height = canvasHeight;
 		this.ctx = this.canvas.getContext("2d");
 		this.snake = new Snake();
+		this.apple = new Apple(this.snake);
 		this.playerInput = null;
 		this.score = 0;
 		this.steps = 0;
 		this.gameOver = false;
 
-		$(this.canvas).click(CanvasClickEvent);
+		$(this.canvas).mousedown(CanvasClickEvent);
+		$(window).keydown(KeyPressed);
 
+		this.DrawPixel(this.apple.Pos, this.apple.Color);
 		this.GameLoop();
 	}
 
@@ -28,20 +31,22 @@ class Game
 				this.ChangeSnakePosition();
 			}
 
-			this.DisplayOutput();
+			this.DisplaySnake();
 			this.steps++;
 
 			setTimeout(this.GameLoop.bind(this), 200);
 		}
 		else
 		{
-			alert("GAME OVER MAN!!");
+			//alert("GAME OVER MAN!!");
 
+			this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 			this.score = 0;
 			this.steps = 0;
 			this.gameOver = false;
 			this.snake.Initialize();
-			//apple.RandomizePosition(snake);
+			this.apple.RandomizePosition(this.snake);
+			this.DrawPixel(this.apple.Pos, this.apple.Color);
 			this.GameLoop();
 		}
 	}
@@ -104,20 +109,24 @@ class Game
 				break;
 		}
 
-		////check if ate apple
-		//if (snake.Head.X == apple.Position.X && snake.Head.Y == apple.Position.Y)
-		//{
-		//	snake.Positions.Add(lastPos);
-		//	apple.RandomizePosition(snake);
-		//	score += 10;
-		//}
+		//check if ate apple
+		if (this.snake.Head.X == this.apple.Pos.X && this.snake.Head.Y == this.apple.Pos.Y)
+		{
+			//snake.Positions.Add(lastPos);
+			this.apple.RandomizePosition(this.snake);
+			this.DrawPixel(this.apple.Pos, this.apple.Color);
+			this.score += 10;
+		}
 
-		////check for collisions
-		//if (snake.Head.X < 1 || snake.Head.X > (gridWidth - 2) || snake.Head.Y < 1 || snake.Head.Y > (gridHeight - 2) || snake.AteSelf())
-		//	gameOver = true;
+		//check for collisions
+		if (this.snake.Head.X < 0 || this.snake.Head.X > (boardPixels - 1) || this.snake.Head.Y < 0 ||
+			this.snake.Head.Y > (boardPixels - 1))// || snake.AteSelf())
+		{
+			this.gameOver = true;
+		}
 	}
 
-	DisplayOutput()
+	DisplaySnake()
 	{
 		for (var i = 0; i < this.snake.Positions.length; i++)
 		{
