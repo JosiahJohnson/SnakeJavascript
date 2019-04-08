@@ -1,20 +1,20 @@
 class Apple
 {
-	constructor(snake)
+	constructor()
 	{
 		this.Color = "#FF0000";
-		this.RandomizePosition(snake);
+		this.RandomizePosition();
 	}
 
-	RandomizePosition(snake)
+	RandomizePosition()
 	{
 		var pos = new Position(0, 0);
 
 		do
 		{
-			pos.X = this.GetRandomNumber(0, boardPixels - 1);
-			pos.Y = this.GetRandomNumber(0, boardPixels - 1);
-		} while (this.IsOnSnakePosition(pos, snake));
+			pos.X = this.GetRandomNumber(0, board.PixelCount - 1);
+			pos.Y = this.GetRandomNumber(0, board.PixelCount - 1);
+		} while (this.IsOnSnakePosition(pos));
 
 		this.Pos = pos;
 	}
@@ -26,7 +26,7 @@ class Apple
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-	IsOnSnakePosition(pos, snake)
+	IsOnSnakePosition(pos)
 	{
 		var overlap = false;
 

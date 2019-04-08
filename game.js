@@ -1,149 +1,90 @@
-class Game
+var board, snake, apple, player;
+const Direction = { "Up": 0, "Down": 1, "Left": 2, "Right": 3 };
+
+$(function ()
 {
-	constructor()
+	InitializeGame();
+});
+
+function InitializeGame()
+{
+	board = new Board();
+	snake = new Snake();
+	apple = new Apple();
+	player = new Player();
+
+	$(board.Canvas).click(CanvasClickEvent);
+	$(window).keydown(KeyPressed);
+
+	board.DrawPixel(apple.Pos, apple.Color);
+	GameLoop();
+}
+
+function GameLoop()
+{
+	if (!player.GameOver)
 	{
-		this.canvas = document.getElementById("SnakeCanvas");
-		this.canvas.width = canvasWidth;
-		this.canvas.height = canvasHeight;
-		this.ctx = this.canvas.getContext("2d");
-		this.snake = new Snake();
-		this.apple = new Apple(this.snake);
-		this.playerInput = null;
-		this.score = 0;
-		this.steps = 0;
-		this.gameOver = false;
-
-		$(this.canvas).click(CanvasClickEvent);
-		$(window).keydown(KeyPressed);
-
-		this.DrawPixel(this.apple.Pos, this.apple.Color);
-		this.GameLoop();
-	}
-
-	GameLoop()
-	{
-		if (!this.gameOver)
+		if (player.Steps > 0)
 		{
-			if (this.steps > 0)
-			{
-				this.ClearScreen();
-				this.CheckUserInput();
-				this.ChangeSnakePosition();
-			}
-
-			this.DisplaySnake();
-			this.steps++;
-
-			setTimeout(this.GameLoop.bind(this), 200);
-		}
-		else
-		{
-			//alert("GAME OVER MAN!!");
-
-			this.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-			this.score = 0;
-			this.steps = 0;
-			this.gameOver = false;
-			this.snake.Initialize();
-			this.apple.RandomizePosition(this.snake);
-			this.DrawPixel(this.apple.Pos, this.apple.Color);
-			this.GameLoop();
-		}
-	}
-
-	ClearScreen()
-	{
-		this.ClearPixel(this.snake.Positions[this.snake.Positions.length - 1]);
-	}
-
-	CheckUserInput()
-	{
-		switch (this.playerInput)
-		{
-			case Direction.Up:
-				if (this.snake.Dir != Direction.Down)
-					this.snake.Dir = Direction.Up;
-				break;
-			case Direction.Down:
-				if (this.snake.Dir != Direction.Up)
-					this.snake.Dir = Direction.Down;
-				break;
-			case Direction.Left:
-				if (this.snake.Dir != Direction.Right)
-					this.snake.Dir = Direction.Left;
-				break;
-			case Direction.Right:
-				if (this.snake.Dir != Direction.Left)
-					this.snake.Dir = Direction.Right;
-				break;
+			board.ClearSnake();
+			player.CheckInput();
+			snake.ChangePosition();
 		}
 
-		this.playerInput = null;
-	}
+		board.DrawSnake();
+		player.Steps++;
 
-	ChangeSnakePosition()
+		setTimeout(GameLoop.bind(this), player.GetSpeed());
+	}
+	else
 	{
-		//Position lastPos = new Position(snake.Tail.X, snake.Tail.Y);
+		//alert("GAME OVER MAN!!");
 
-		//set tail positions
-		for (var i = (this.snake.Positions.length - 1); i > 0; i--)
-		{
-			this.snake.Positions[i].X = this.snake.Positions[i - 1].X;
-			this.snake.Positions[i].Y = this.snake.Positions[i - 1].Y;
-		}
-
-		//set head position
-		switch (this.snake.Dir)
-		{
-			case Direction.Up:
-				this.snake.Head.Y--;
-				break;
-			case Direction.Down:
-				this.snake.Head.Y++;
-				break;
-			case Direction.Left:
-				this.snake.Head.X--;
-				break;
-			case Direction.Right:
-				this.snake.Head.X++;
-				break;
-		}
-
-		//check if ate apple
-		if (this.snake.Head.X == this.apple.Pos.X && this.snake.Head.Y == this.apple.Pos.Y)
-		{
-			//snake.Positions.Add(lastPos);
-			this.apple.RandomizePosition(this.snake);
-			this.DrawPixel(this.apple.Pos, this.apple.Color);
-			this.score += 10;
-		}
-
-		//check for collisions
-		if (this.snake.Head.X < 0 || this.snake.Head.X > (boardPixels - 1) || this.snake.Head.Y < 0 ||
-			this.snake.Head.Y > (boardPixels - 1))// || snake.AteSelf())
-		{
-			this.gameOver = true;
-		}
+		board.ClearScreen();
+		snake.Initialize();
+		apple.RandomizePosition();
+		player.Initialize();
+		board.DrawPixel(apple.Pos, apple.Color);
+		GameLoop();
 	}
+}
 
-	DisplaySnake()
+function CanvasClickEvent(e)
+{
+	if (snake.Dir == Direction.Up || snake.Dir == Direction.Down)
 	{
-		for (var i = 0; i < this.snake.Positions.length; i++)
-		{
-			this.DrawPixel(this.snake.Positions[i], this.snake.Color);
-		}
-	}
+		var clickX = (e.pageX - $(this).offset().left);
+		var x = parseInt(clickX / board.PixelSize);
+		var snakeX = snake.Head.X;
 
-	DrawPixel(pos, color)
-	{
-		this.ctx.fillStyle = color;
-		this.ctx.fillRect(pos.X * pixelSize, pos.Y * pixelSize, pixelSize, pixelSize);
+		if (x > snakeX)
+			player.Input = Direction.Right;
+		else if (x < snakeX)
+			player.Input = Direction.Left;
 	}
+	else if (snake.Dir == Direction.Left || snake.Dir == Direction.Right)
+	{
+		var clickY = (e.pageY - $(this).offset().top);
+		var y = parseInt(clickY / board.PixelSize);
+		var snakeY = snake.Head.Y;
 
-	ClearPixel(pos)
-	{
-		this.ctx.clearRect(pos.X * pixelSize, pos.Y * pixelSize, pixelSize, pixelSize);
+		if (y > snakeY)
+			player.Input = Direction.Down;
+		else if (y < snakeY)
+			player.Input = Direction.Up;
 	}
+}
+
+function KeyPressed(e)
+{
+	if (e.key == "ArrowUp" || e.key == "w")
+		player.Input = Direction.Up;
+	else if (e.key == "ArrowDown" || e.key == "s")
+		player.Input = Direction.Down;
+	else if (e.key == "ArrowLeft" || e.key == "a")
+		player.Input = Direction.Left;
+	else if (e.key == "ArrowRight" || e.key == "d")
+		player.Input = Direction.Right;
 }
 
 class Position
