@@ -13,7 +13,7 @@ function InitializeGame()
 	apple = new Apple();
 	player = new Player();
 
-	$(board.Canvas).click(CanvasClickEvent);
+	$(board.Canvas).mousedown(CanvasClickEvent);
 	$(window).keydown(KeyPressed);
 
 	board.DrawPixel(apple.Pos, apple.Color);
@@ -38,7 +38,7 @@ function GameLoop()
 	}
 	else
 	{
-		//alert("GAME OVER MAN!!");
+		alert("GAME OVER MAN!!\r\nScore: " + player.Score);
 
 		board.ClearScreen();
 		snake.Initialize();
