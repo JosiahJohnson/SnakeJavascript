@@ -2,7 +2,7 @@ class Board
 {
 	constructor()
 	{
-		this.PixelCount = 20;
+		this.PixelCount = 15;
 
 		var screenWidth = $(window).width();
 		var screenHeight = $(window).height();
