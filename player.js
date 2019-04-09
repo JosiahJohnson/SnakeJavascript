@@ -44,10 +44,10 @@ class Player
 	{
 		var speed = 200;
 
-		speed -= (this.Score / 2);
+		speed -= parseInt(this.Score / 4);
 
-		if (speed < 75)
-			speed = 75;
+		if (speed < 100)
+			speed = 100;
 
 		return speed;
 	}
