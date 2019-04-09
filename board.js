@@ -2,7 +2,7 @@ class Board
 {
 	constructor()
 	{
-		this.PixelCount = 15;
+		this.SizeInPixels = 15;
 
 		var screenWidth = $(window).width();
 		var screenHeight = $(window).height();
@@ -11,8 +11,8 @@ class Board
 		if (screenHeight < screenWidth)
 			screenSize = screenHeight;
 
-		this.PixelSize = parseInt((screenSize / this.PixelCount) * .9);
-		this.CanvasWidth = this.PixelSize * this.PixelCount;
+		this.PixelSize = parseInt((screenSize / this.SizeInPixels) * .9);
+		this.CanvasWidth = this.PixelSize * this.SizeInPixels;
 		this.CanvasHeight = this.CanvasWidth;
 
 		this.Canvas = document.getElementById("SnakeCanvas");

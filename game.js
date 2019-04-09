@@ -13,8 +13,9 @@ function InitializeGame()
 	apple = new Apple();
 	player = new Player();
 
-	$(board.Canvas).mousedown(CanvasClickEvent);
-	$(window).keydown(KeyPressed);
+	document.addEventListener("keydown", KeyPressed, false);
+	document.addEventListener("touchstart", TouchStart, false);
+	document.addEventListener("touchmove", TouchMove, false);
 
 	board.DrawPixel(apple.Pos, apple.Color);
 	GameLoop();
@@ -49,32 +50,6 @@ function GameLoop()
 	}
 }
 
-function CanvasClickEvent(e)
-{
-	if (snake.Dir == Direction.Up || snake.Dir == Direction.Down)
-	{
-		var clickX = (e.pageX - $(this).offset().left);
-		var x = parseInt(clickX / board.PixelSize);
-		var snakeX = snake.Head.X;
-
-		if (x > snakeX)
-			player.Input = Direction.Right;
-		else if (x < snakeX)
-			player.Input = Direction.Left;
-	}
-	else if (snake.Dir == Direction.Left || snake.Dir == Direction.Right)
-	{
-		var clickY = (e.pageY - $(this).offset().top);
-		var y = parseInt(clickY / board.PixelSize);
-		var snakeY = snake.Head.Y;
-
-		if (y > snakeY)
-			player.Input = Direction.Down;
-		else if (y < snakeY)
-			player.Input = Direction.Up;
-	}
-}
-
 function KeyPressed(e)
 {
 	if (e.key == "ArrowUp" || e.key == "w")
@@ -85,6 +60,49 @@ function KeyPressed(e)
 		player.Input = Direction.Left;
 	else if (e.key == "ArrowRight" || e.key == "d")
 		player.Input = Direction.Right;
+}
+
+function TouchStart(e)
+{
+	player.TouchEnd = false;
+	player.TouchStartX = e.touches[0].clientX;
+	player.TouchStartY = e.touches[0].clientY;
+}
+
+function TouchMove(e)
+{
+	if (!player.TouchEnd)
+	{
+		var touch = e.touches[0];
+
+		//snake only has 2 choices for directions, so eliminate any ambiguity in swipe direction
+		if (snake.Dir == Direction.Up || snake.Dir == Direction.Down)
+		{
+			if (touch.clientX < (player.TouchStartX - player.TouchMinDistance))
+			{
+				player.TouchEnd = true;
+				player.Input = Direction.Left;
+			}
+			else if (touch.clientX > (player.TouchStartX + player.TouchMinDistance))
+			{
+				player.TouchEnd = true;
+				player.Input = Direction.Right;
+			}
+		}
+		else if (snake.Dir == Direction.Left || snake.Dir == Direction.Right)
+		{
+			if (touch.clientY < (player.TouchStartY - player.TouchMinDistance))
+			{
+				player.TouchEnd = true;
+				player.Input = Direction.Up;
+			}
+			else if (touch.clientY > (player.TouchStartY + player.TouchMinDistance))
+			{
+				player.TouchEnd = true;
+				player.Input = Direction.Down;
+			}
+		}
+	}
 }
 
 class Position

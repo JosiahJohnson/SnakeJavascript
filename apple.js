@@ -12,8 +12,8 @@ class Apple
 
 		do
 		{
-			pos.X = this.GetRandomNumber(0, board.PixelCount - 1);
-			pos.Y = this.GetRandomNumber(0, board.PixelCount - 1);
+			pos.X = this.GetRandomNumber(0, board.SizeInPixels - 1);
+			pos.Y = this.GetRandomNumber(0, board.SizeInPixels - 1);
 		} while (this.IsOnSnakePosition(pos));
 
 		this.Pos = pos;

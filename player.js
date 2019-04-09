@@ -2,6 +2,7 @@ class Player
 {
 	constructor()
 	{
+		this.TouchMinDistance = 50;
 		this.Initialize();
 	}
 
