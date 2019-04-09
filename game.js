@@ -14,8 +14,8 @@ function InitializeGame()
 	player = new Player();
 
 	document.addEventListener("keydown", KeyPressed, false);
-	document.addEventListener("touchstart", TouchStart, false);
-	document.addEventListener("touchmove", TouchMove, false);
+	document.addEventListener("touchstart", TouchStart, { passive: false });
+	document.addEventListener("touchmove", TouchMove, { passive: false });
 
 	board.DrawPixel(apple.Pos, apple.Color);
 	GameLoop();
@@ -64,6 +64,7 @@ function KeyPressed(e)
 
 function TouchStart(e)
 {
+	e.preventDefault();
 	player.TouchEnd = false;
 	player.TouchStartX = e.touches[0].clientX;
 	player.TouchStartY = e.touches[0].clientY;
@@ -71,6 +72,8 @@ function TouchStart(e)
 
 function TouchMove(e)
 {
+	e.preventDefault();
+
 	if (!player.TouchEnd)
 	{
 		var touch = e.touches[0];
