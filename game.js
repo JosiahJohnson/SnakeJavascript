@@ -23,9 +23,12 @@ $(function ()
 	$("#QuitButton").click(function ()
 	{
 		$("#HomeDiv").show();
+		$("#PlayButton").focus();
 		$("#GameDiv").hide();
 		$("#GameOverDiv").hide();
 	});
+
+	$("#PlayButton").focus();
 });
 
 function ResetGame()
@@ -57,6 +60,7 @@ function GameLoop()
 	{
 		$("#GameOverDiv").show();
 		$("#GameOverScore").text(player.Score);
+		$("#PlayAgainButton").focus();
 	}
 }
 
