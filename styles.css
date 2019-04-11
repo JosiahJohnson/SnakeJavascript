@@ -1,0 +1,40 @@
+﻿body
+{
+	background-color: gray;
+	font-family: 'Lucida Console';
+}
+#HomeDiv
+{
+	text-align: center;
+}
+#HomeDiv h1
+{
+	font-size: 9vh;
+}
+.MenuButton
+{
+	font-size: 5vh;
+	width: 50%;
+}
+#SnakeCanvas
+{
+	background-color: black;
+	touch-action: none;
+}
+#GameOverDiv
+{
+	position: absolute;
+	margin: 0 auto;
+	width: 80%;
+	height: 150px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	top: 100px;
+	background-color: gray;
+}
+.PopupButton
+{
+	width:40%;
+	height:30px;
+}

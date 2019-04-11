@@ -3,7 +3,6 @@ class Apple
 	constructor()
 	{
 		this.Color = "#FF0000";
-		this.RandomizePosition();
 	}
 
 	RandomizePosition()
@@ -17,6 +16,7 @@ class Apple
 		} while (this.IsOnSnakePosition(pos));
 
 		this.Pos = pos;
+		board.DrawPixel(this.Pos, this.Color);
 	}
 
 	GetRandomNumber(min, max)

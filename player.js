@@ -3,7 +3,7 @@ class Player
 	constructor()
 	{
 		this.TouchMinDistance = 30;
-		this.Initialize();
+		this.GameOver = true;
 	}
 
 	Initialize()

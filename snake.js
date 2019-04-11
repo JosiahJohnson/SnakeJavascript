@@ -3,7 +3,6 @@ class Snake
 	constructor()
 	{
 		this.Color = "#00FF00";
-		this.Initialize();
 	}
 
 	Initialize()
@@ -50,7 +49,6 @@ class Snake
 		{
 			this.Positions.push(lastPos);
 			apple.RandomizePosition();
-			board.DrawPixel(apple.Pos, apple.Color);
 			player.IncrementScore(10);
 		}
 

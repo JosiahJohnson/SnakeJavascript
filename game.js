@@ -3,11 +3,6 @@ const Direction = { "Up": 0, "Down": 1, "Left": 2, "Right": 3 };
 
 $(function ()
 {
-	InitializeGame();
-});
-
-function InitializeGame()
-{
 	board = new Board();
 	snake = new Snake();
 	apple = new Apple();
@@ -17,7 +12,28 @@ function InitializeGame()
 	document.addEventListener("touchstart", TouchStart, { passive: false });
 	document.addEventListener("touchmove", TouchMove, { passive: false });
 
-	board.DrawPixel(apple.Pos, apple.Color);
+	$("#PlayButton, #PlayAgainButton").click(function ()
+	{
+		$("#HomeDiv").hide();
+		$("#GameDiv").show();
+		$("#GameOverDiv").hide();
+		ResetGame();
+	});
+
+	$("#QuitButton").click(function ()
+	{
+		$("#HomeDiv").show();
+		$("#GameDiv").hide();
+		$("#GameOverDiv").hide();
+	});
+});
+
+function ResetGame()
+{
+	board.ClearScreen();
+	snake.Initialize();
+	apple.RandomizePosition();
+	player.Initialize();
 	GameLoop();
 }
 
@@ -39,70 +55,73 @@ function GameLoop()
 	}
 	else
 	{
-		alert("GAME OVER MAN!!\r\nScore: " + player.Score);
-
-		board.ClearScreen();
-		snake.Initialize();
-		apple.RandomizePosition();
-		player.Initialize();
-		board.DrawPixel(apple.Pos, apple.Color);
-		GameLoop();
+		$("#GameOverDiv").show();
+		$("#GameOverScore").text(player.Score);
 	}
 }
 
 function KeyPressed(e)
 {
-	if (e.key == "ArrowUp" || e.key == "w")
-		player.Input = Direction.Up;
-	else if (e.key == "ArrowDown" || e.key == "s")
-		player.Input = Direction.Down;
-	else if (e.key == "ArrowLeft" || e.key == "a")
-		player.Input = Direction.Left;
-	else if (e.key == "ArrowRight" || e.key == "d")
-		player.Input = Direction.Right;
+	if (!player.GameOver)
+	{
+		if (e.key == "ArrowUp" || e.key == "w")
+			player.Input = Direction.Up;
+		else if (e.key == "ArrowDown" || e.key == "s")
+			player.Input = Direction.Down;
+		else if (e.key == "ArrowLeft" || e.key == "a")
+			player.Input = Direction.Left;
+		else if (e.key == "ArrowRight" || e.key == "d")
+			player.Input = Direction.Right;
+	}
 }
 
 function TouchStart(e)
 {
-	e.preventDefault();
-	player.TouchEnd = false;
-	player.TouchStartX = e.touches[0].clientX;
-	player.TouchStartY = e.touches[0].clientY;
+	if (!player.GameOver)
+	{
+		e.preventDefault();
+		player.TouchEnd = false;
+		player.TouchStartX = e.touches[0].clientX;
+		player.TouchStartY = e.touches[0].clientY;
+	}
 }
 
 function TouchMove(e)
 {
-	e.preventDefault();
-
-	if (!player.TouchEnd)
+	if (!player.GameOver)
 	{
-		var touch = e.touches[0];
+		e.preventDefault();
 
-		//snake only has 2 choices for directions, so eliminate any ambiguity in swipe direction
-		if (snake.Dir == Direction.Up || snake.Dir == Direction.Down)
+		if (!player.TouchEnd)
 		{
-			if (touch.clientX < (player.TouchStartX - player.TouchMinDistance))
+			var touch = e.touches[0];
+
+			//snake only has 2 choices for directions, so eliminate any ambiguity in swipe direction
+			if (snake.Dir == Direction.Up || snake.Dir == Direction.Down)
 			{
-				player.TouchEnd = true;
-				player.Input = Direction.Left;
+				if (touch.clientX < (player.TouchStartX - player.TouchMinDistance))
+				{
+					player.TouchEnd = true;
+					player.Input = Direction.Left;
+				}
+				else if (touch.clientX > (player.TouchStartX + player.TouchMinDistance))
+				{
+					player.TouchEnd = true;
+					player.Input = Direction.Right;
+				}
 			}
-			else if (touch.clientX > (player.TouchStartX + player.TouchMinDistance))
+			else if (snake.Dir == Direction.Left || snake.Dir == Direction.Right)
 			{
-				player.TouchEnd = true;
-				player.Input = Direction.Right;
-			}
-		}
-		else if (snake.Dir == Direction.Left || snake.Dir == Direction.Right)
-		{
-			if (touch.clientY < (player.TouchStartY - player.TouchMinDistance))
-			{
-				player.TouchEnd = true;
-				player.Input = Direction.Up;
-			}
-			else if (touch.clientY > (player.TouchStartY + player.TouchMinDistance))
-			{
-				player.TouchEnd = true;
-				player.Input = Direction.Down;
+				if (touch.clientY < (player.TouchStartY - player.TouchMinDistance))
+				{
+					player.TouchEnd = true;
+					player.Input = Direction.Up;
+				}
+				else if (touch.clientY > (player.TouchStartY + player.TouchMinDistance))
+				{
+					player.TouchEnd = true;
+					player.Input = Direction.Down;
+				}
 			}
 		}
 	}
