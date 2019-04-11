@@ -11,7 +11,7 @@ class Board
 		if (screenHeight < screenWidth)
 			screenSize = screenHeight;
 
-		this.PixelSize = parseInt((screenSize / this.SizeInPixels) * .9);
+		this.PixelSize = parseInt((screenSize / this.SizeInPixels) * .9, 10);
 		this.CanvasWidth = this.PixelSize * this.SizeInPixels;
 		this.CanvasHeight = this.CanvasWidth;
 

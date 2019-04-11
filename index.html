@@ -3,12 +3,12 @@
 	<title>untitled snake game</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="game.js"></script>
-	<script type="text/javascript" src="board.js"></script>
-	<script type="text/javascript" src="snake.js"></script>
-	<script type="text/javascript" src="apple.js"></script>
-	<script type="text/javascript" src="player.js"></script>
-	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="game.js?rev=1"></script>
+	<script type="text/javascript" src="board.js?rev=1"></script>
+	<script type="text/javascript" src="snake.js?rev=1"></script>
+	<script type="text/javascript" src="apple.js?rev=1"></script>
+	<script type="text/javascript" src="player.js?rev=1"></script>
+	<link href="styles.css?rev=1" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -19,18 +19,26 @@
 		<p style="text-align:right; font-size:10px;">Josiah<br />Johnson<br />Games&trade;</p>
 	</div>
 	<div id="GameDiv" style="display:none;">
-		<p>
+		<p style="float:left;">
 			Score: <b><span id="Score"></span></b>
 		</p>
+		<p style="float:right;">
+			Hi-Score: <b><span id="HiScore"></span></b>
+		</p>
+		<div style="clear:both;"></div>
 		<div style="text-align:center;">
 			<canvas id="SnakeCanvas"></canvas>
 		</div>
 		<div id="GameOverDiv" style="display:none;">
 			<h1>GAME OVER</h1>
-			<p>
-				Score: <b><span id="GameOverScore"></span></b>
-			</p>
+			<div id="GameOverHiScoreDiv" style="color:red; display:none;"><b>NEW HI-SCORE!!</b></div>
 			<div>
+				Score: <b><span id="GameOverScore"></span></b>
+			</div>
+			<div>
+				Time: <b><span id="GameOverTime"></span></b>
+			</div>
+			<div style="padding-top:10px;">
 				<input type="button" id="PlayAgainButton" class="PopupButton" value="Play Again" />
 				<input type="button" id="QuitButton" class="PopupButton" value="Quit" />
 			</div>

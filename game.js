@@ -17,6 +17,7 @@ $(function ()
 		$("#HomeDiv").hide();
 		$("#GameDiv").show();
 		$("#GameOverDiv").hide();
+		$("#GameOverHiScoreDiv").hide();
 		ResetGame();
 	});
 
@@ -26,6 +27,7 @@ $(function ()
 		$("#PlayButton").focus();
 		$("#GameDiv").hide();
 		$("#GameOverDiv").hide();
+		$("#GameOverHiScoreDiv").hide();
 	});
 
 	$("#PlayButton").focus();
@@ -54,13 +56,17 @@ function GameLoop()
 		board.DrawSnake();
 		player.Steps++;
 
-		setTimeout(GameLoop.bind(this), player.GetSpeed());
+		var speed = player.GetSpeed();
+		player.Time += speed;
+		setTimeout(GameLoop.bind(this), speed);
 	}
 	else
 	{
 		$("#GameOverDiv").show();
 		$("#GameOverScore").text(player.Score);
+		$("#GameOverTime").text(player.GetTimeString());
 		$("#PlayAgainButton").focus();
+		player.SaveScore();
 	}
 }
 

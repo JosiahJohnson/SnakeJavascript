@@ -26,15 +26,19 @@
 	position: absolute;
 	margin: 0 auto;
 	width: 80%;
-	height: 150px;
+	height: 160px;
 	left: 0;
 	right: 0;
 	text-align: center;
 	top: 100px;
 	background-color: gray;
 }
+#GameOverDiv h1
+{
+	margin:10px 0;
+}
 .PopupButton
 {
-	width:40%;
-	height:30px;
+	width: 40%;
+	height: 30px;
 }
