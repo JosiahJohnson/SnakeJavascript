@@ -4,14 +4,22 @@ class Board
 	{
 		this.SizeInPixels = 15;
 
-		var screenWidth = $(window).width();
-		var screenHeight = $(window).height();
-		var screenSize = screenWidth;
+		var width = $(window).width();
+		var height = $(window).height();
+		var size, percent;
 
-		if (screenHeight < screenWidth)
-			screenSize = screenHeight;
+		if (height > width)
+		{
+			size = width;
+			percent = .9;
+		}
+		else
+		{
+			size = height;
+			percent = .75;
+		}
 
-		this.PixelSize = parseInt((screenSize / this.SizeInPixels) * .9, 10);
+		this.PixelSize = parseInt((size / this.SizeInPixels) * percent, 10);
 		this.CanvasWidth = this.PixelSize * this.SizeInPixels;
 		this.CanvasHeight = this.CanvasWidth;
 

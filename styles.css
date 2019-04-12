@@ -3,6 +3,8 @@
 	background-color: gray;
 	font-family: 'Roboto Mono', monospace;
 }
+
+/*Home*/
 #HomeDiv
 {
 	text-align: center;
@@ -10,16 +12,41 @@
 #HomeDiv h1
 {
 	font-size: 9vh;
+	margin: 0;
+}
+#HomeLogo
+{
+	max-width:245px;
+	width:60%;
+}
+#HomeDev
+{
+	position:absolute;
+	right:10px;
+	text-align:right;
+	font-size:10px;
+}
+#HomeDesc
+{
+	font-size:12px;
 }
 .MenuButton
 {
-	font-size: 5vh;
+	font-size: 4vh;
 	width: 50%;
+	margin-bottom:10px;
 }
+
+/*Game*/
 #SnakeCanvas
 {
 	background-color: black;
 	touch-action: none;
+}
+#GameInstructions
+{
+	margin-top:10px;
+	font-size:10px;
 }
 #GameOverDiv
 {
@@ -30,12 +57,20 @@
 	left: 0;
 	right: 0;
 	text-align: center;
-	top: 100px;
+	top: 80px;
 	background-color: gray;
 }
 #GameOverDiv h1
 {
 	margin:10px 0;
+}
+#GameOverHiScoreDiv
+{
+	background-color:white;
+	color:red;
+	font-weight:bold;
+	width:70%;
+	margin:0 auto;
 }
 .PopupButton
 {

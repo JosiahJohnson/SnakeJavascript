@@ -4,6 +4,7 @@ class Player
 	{
 		this.TouchMinDistance = 30;
 		this.GameOver = true;
+		$("#HiScore").text(this.GetHiScore());
 	}
 
 	Initialize()
@@ -13,9 +14,7 @@ class Player
 		this.Steps = 0;
 		this.Time = 0;
 		this.GameOver = false;
-
 		$("#Score").text(this.Score);
-		$("#HiScore").text(this.GetHiScore());
 	}
 
 	CheckInput()
