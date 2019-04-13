@@ -1,0 +1,86 @@
+﻿/*Home*/
+#HomeDiv
+{
+	position:relative;
+	max-width:1024px;
+	margin:0 auto;
+}
+#HomeDiv h1
+{
+	font-size: 5em;
+}
+#HomeDesc
+{
+	font-size:1.5em;
+}
+.MenuButtonFull
+{
+	width: 41%;
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+.MenuButtonHalf
+{
+	width: 20%;
+	font-size: 2em;
+	margin-bottom: 20px;
+}
+
+/*Game*/
+#GameDiv
+{
+	position: relative;
+	max-width: 1024px;
+	margin: 0 auto;
+	font-size: 1.5em;
+}
+#GameInstructionsMobile
+{
+	display: none;
+}
+#GameInstructionsDesktop
+{
+	margin-top: 10px;
+}
+#GameOverDiv
+{
+	top: 150px;
+	width: 42%;
+	height: 225px;
+}
+#GameOverDiv h1
+{
+	margin: 10px 0;
+	font-size: 3.5em;
+}
+#GameOverHiScoreDiv
+{
+	width: 70%;
+}
+.PopupButton
+{
+	width: 40%;
+	font-size: 1.1em;
+	padding: 8px 0;
+}
+
+/*Leaderboard*/
+#LeaderboardDiv
+{
+	position: relative;
+	max-width: 1024px;
+	margin: 0 auto;
+}
+#LeaderboardTable
+{
+	width: 60%;
+	margin: 0 auto;
+}
+#LeaderboardTable th
+{
+	font-size: 1.5em;
+}
+#LeaderboardTable td
+{
+	font-size: 1.5em;
+}

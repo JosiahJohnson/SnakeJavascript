@@ -1,0 +1,67 @@
+﻿/*Home*/
+#HomeDiv h1
+{
+	font-size: 4em;
+}
+#HomeLogo
+{
+	width: 60%;
+}
+#HomeDev
+{
+	font-size: .8em;
+}
+.MenuButtonFull
+{
+	width: 92%;
+	font-size: 1.7em;
+	margin-bottom: 10px;
+}
+.MenuButtonHalf
+{
+	width: 45%;
+	font-size: 1.7em;
+	margin-bottom: 10px;
+}
+
+/*Game*/
+#GameInstructionsMobile
+{
+	margin-top: 10px;
+	font-size: .9em;
+}
+#GameInstructionsDesktop
+{
+	display:none;
+}
+#GameOverDiv
+{
+	top: 80px;
+	width: 80%;
+	height: 140px;
+}
+#GameOverDiv h1
+{
+	margin: 5px 0;
+	font-size: 3em;
+}
+#GameOverHiScoreDiv
+{
+	width: 70%;
+}
+.PopupButton
+{
+	width: 40%;
+	font-size:1.1em;
+	padding:5px 0;
+}
+
+/*Leaderboard*/
+#LeaderboardTable
+{
+	width: 100%;
+}
+#LeaderboardTable td
+{
+	font-size: 1.2em;
+}

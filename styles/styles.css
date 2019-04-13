@@ -1,0 +1,84 @@
+﻿body
+{
+	background-color: gray;
+	font-family: 'Roboto Mono', monospace;
+	font-size:12px;
+}
+
+/*Home*/
+#HomeDiv
+{
+	text-align: center;
+}
+#HomeDiv h1
+{
+	margin: 0;
+}
+#HomeLogo
+{
+	max-width:245px;
+}
+#HomeDev
+{
+	position:absolute;
+	right:10px;
+	text-align:right;
+}
+
+/*Game*/
+#Score, #HiScore, #GameOverScore, #GameOverTime
+{
+	font-weight: bold;
+}
+#SnakeCanvas
+{
+	background-color: black;
+	touch-action: none;
+}
+#GameOverDiv
+{
+	background-color: gray;
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+#GameOverDiv h1
+{
+	margin:10px 0;
+}
+#GameOverHiScoreDiv
+{
+	background-color:white;
+	color:red;
+	font-weight:bold;
+	width:70%;
+	margin:0 auto;
+}
+
+/*Leaderboard*/
+#LeaderboardTable
+{
+	border:1px solid white;
+	border-collapse:collapse;
+}
+#LeaderboardTable th
+{
+	background-color:gray;
+	color:white;
+	border:1px solid white;
+	width:33.33%;
+}
+#LeaderboardTable tr
+{
+	background-color:white;
+}
+#LeaderboardTable tr:nth-child(odd)
+{
+	background-color: lightgray;
+}
+#LeaderboardTable td:not(:first-child)
+{
+	text-align: right;
+}
