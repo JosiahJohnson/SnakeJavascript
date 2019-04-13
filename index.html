@@ -13,46 +13,47 @@
 	<meta name="description" content="Play the classic snake game on your mobile phone or desktop browser! Hi-score leaderboard support plus more features to come!" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="game.js?rev=2"></script>
-	<script type="text/javascript" src="board.js?rev=2"></script>
-	<script type="text/javascript" src="snake.js?rev=1"></script>
-	<script type="text/javascript" src="apple.js?rev=1"></script>
-	<script type="text/javascript" src="player.js?rev=2"></script>
-	<link href="styles.css?rev=3" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="scripts/game.js?rev=2"></script>
+	<script type="text/javascript" src="scripts/board.js?rev=2"></script>
+	<script type="text/javascript" src="scripts/snake.js?rev=1"></script>
+	<script type="text/javascript" src="scripts/apple.js?rev=1"></script>
+	<script type="text/javascript" src="scripts/player.js?rev=2"></script>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=3" />
+	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css" />
+	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 	<div id="HomeDiv">
 		<h1>untitled snake game</h1>
 		<div id="HomeDev">Josiah<br />Johnson<br />Games&trade;</div>
-		<img id="HomeLogo" src="snake.png" /><br />
+		<img id="HomeLogo" src="assets/snake.png" /><br />
 		<p id="HomeDesc">Play the classic snake game on your mobile phone or desktop browser!</p>
-		<input type="button" id="PlayButton" class="MenuButton" value="Play" /><br />
-		<input type="button" id="LeaderboardButton" class="MenuButton" value="Leaderboard" />
+		<input type="button" id="PlayButton" class="MenuButtonFull" value="Play" /><br />
+		<input type="button" id="LeaderboardButton" class="MenuButtonFull" value="Leaderboard" />
+		<!--<input type="button" id="CustomizeButton" class="MenuButtonHalf" value="Customize" />-->
 	</div>
 	<div id="GameDiv" style="display:none;">
 		<div style="float:left;">
-			Score: <b><span id="Score"></span></b>
+			Score: <span id="Score"></span>
 		</div>
 		<div style="float:right;">
-			Hi-Score: <b><span id="HiScore"></span></b>
+			Hi-Score: <span id="HiScore"></span>
 		</div>
 		<div style="clear:both; margin-bottom:10px;"></div>
 		<div style="text-align:center;">
 			<canvas id="SnakeCanvas"></canvas>
-			<div id="GameInstructions">
-				Swipe anywhere on screen to move the snake.<br />
-				Use arrow keys or WASD on desktop.
-			</div>
+			<div id="GameInstructionsMobile">Swipe anywhere on screen to move the snake.</div>
+			<div id="GameInstructionsDesktop">Use arrow keys or WASD to move the snake.</div>
 		</div>
 		<div id="GameOverDiv" style="display:none;">
 			<h1>GAME OVER</h1>
 			<div id="GameOverHiScoreDiv" style="display:none;">NEW HI-SCORE!!</div>
 			<div>
-				Score: <b><span id="GameOverScore"></span></b>
+				Score: <span id="GameOverScore"></span>
 			</div>
 			<div>
-				Time: <b><span id="GameOverTime"></span></b>
+				Time: <span id="GameOverTime"></span>
 			</div>
 			<div style="padding-top:10px;">
 				<input type="button" id="PlayAgainButton" class="PopupButton" value="Play Again" />
@@ -69,7 +70,7 @@
 			</tr>
 		</table>
 		<div style="text-align:center; padding-top:20px;">
-			<input type="button" id="Leaderboard_HomeButton" class="MenuButton" value="Home" />
+			<input type="button" id="Leaderboard_HomeButton" class="MenuButtonHalf" value="Home" />
 		</div>
 	</div>
 </body>
