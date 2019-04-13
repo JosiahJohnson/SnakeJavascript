@@ -77,3 +77,33 @@
 	width: 40%;
 	height: 30px;
 }
+
+#LeaderboardTable
+{
+	width:100%;
+	border:1px solid white;
+	border-collapse:collapse;
+}
+#LeaderboardTable th
+{
+	background-color:gray;
+	color:white;
+	border:1px solid white;
+	width:33.33%;
+}
+#LeaderboardTable tr
+{
+	background-color:white;
+}
+#LeaderboardTable tr:nth-child(odd)
+{
+	background-color: lightgray;
+}
+#LeaderboardTable td
+{
+	font-size:14px;
+}
+#LeaderboardTable td:not(:first-child)
+{
+	text-align: right;
+}

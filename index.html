@@ -13,12 +13,12 @@
 	<meta name="description" content="Play the classic snake game on your mobile phone or desktop browser! Hi-score leaderboard support plus more features to come!" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="game.js?rev=1"></script>
+	<script type="text/javascript" src="game.js?rev=2"></script>
 	<script type="text/javascript" src="board.js?rev=2"></script>
 	<script type="text/javascript" src="snake.js?rev=1"></script>
 	<script type="text/javascript" src="apple.js?rev=1"></script>
 	<script type="text/javascript" src="player.js?rev=2"></script>
-	<link href="styles.css?rev=2" rel="stylesheet" type="text/css" />
+	<link href="styles.css?rev=3" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
@@ -28,7 +28,7 @@
 		<img id="HomeLogo" src="snake.png" /><br />
 		<p id="HomeDesc">Play the classic snake game on your mobile phone or desktop browser!</p>
 		<input type="button" id="PlayButton" class="MenuButton" value="Play" /><br />
-		<!--<input type="button" id="LeaderboardButton" class="MenuButton" value="Leaderboard" />-->
+		<input type="button" id="LeaderboardButton" class="MenuButton" value="Leaderboard" />
 	</div>
 	<div id="GameDiv" style="display:none;">
 		<div style="float:left;">
@@ -58,6 +58,18 @@
 				<input type="button" id="PlayAgainButton" class="PopupButton" value="Play Again" />
 				<input type="button" id="QuitButton" class="PopupButton" value="Quit" />
 			</div>
+		</div>
+	</div>
+	<div id="LeaderboardDiv" style="display:none;">
+		<table id="LeaderboardTable">
+			<tr>
+				<th colspan="2">Score</th>
+				<th>Time</th>
+				<th>Date</th>
+			</tr>
+		</table>
+		<div style="text-align:center; padding-top:20px;">
+			<input type="button" id="Leaderboard_HomeButton" class="MenuButton" value="Home" />
 		</div>
 	</div>
 </body>

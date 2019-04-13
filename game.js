@@ -18,18 +18,31 @@ $(function ()
 		$("#GameDiv").show();
 		$("#GameOverDiv").hide();
 		$("#GameOverHiScoreDiv").hide();
+		$("#LeaderboardDiv").hide();
 		ResetGame();
 	});
 
-	$("#QuitButton").click(function ()
+	$("#LeaderboardButton").click(function ()
 	{
-		$("#HomeDiv").show();
-		$("#PlayButton").focus();
+		$("#HomeDiv").hide();
 		$("#GameDiv").hide();
 		$("#GameOverDiv").hide();
 		$("#GameOverHiScoreDiv").hide();
+		$("#LeaderboardDiv").show();
+		LoadLeaderboard();
 	});
 
+	$("#QuitButton, #Leaderboard_HomeButton").click(function ()
+	{
+		$("#HomeDiv").show();
+		$("#GameDiv").hide();
+		$("#GameOverDiv").hide();
+		$("#GameOverHiScoreDiv").hide();
+		$("#LeaderboardDiv").hide();
+
+		$("#PlayButton").focus();
+	});
+	
 	$("#PlayButton").focus();
 });
 
@@ -135,6 +148,30 @@ function TouchMove(e)
 			}
 		}
 	}
+}
+
+function LoadLeaderboard()
+{
+	var scoreArray = player.GetHiScores();
+	var rowsHtml = "";
+	$("#LeaderboardTable tr.ScoreRow").remove();
+
+	if (scoreArray.length > 0)
+	{
+		for (var i = 0; i < scoreArray.length; i++)
+		{
+			var scoreObj = scoreArray[i];
+			rowsHtml += "<tr class=\"ScoreRow\"><td>" + (i + 1) + "</td>";
+			rowsHtml += "<td>" + scoreObj.score + "</td>";
+			rowsHtml += "<td>" + scoreObj.timeString + "</td>";
+			rowsHtml += "<td>" + new Date(scoreObj.date).toLocaleDateString() + "</td>";
+			rowsHtml += "</tr>";
+		}
+	}
+	else
+		rowsHtml += "<tr class=\"ScoreRow\"><td colspan=\"4\">...maybe try playing the game first!</td>";
+
+	$("#LeaderboardTable").append(rowsHtml);
 }
 
 class Position
