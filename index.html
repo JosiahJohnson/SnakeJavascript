@@ -10,17 +10,17 @@
 		gtag('config', 'UA-138215665-1');
 	</script>
 	<title>untitled snake game</title>
-	<meta name="description" content="Play the classic snake game on your mobile phone or desktop browser! Hi-score leaderboard support plus more features to come!" />
+	<meta name="description" content="Play the classic snake game on your mobile phone or desktop browser! Hi-score leaderboards, customizations and more!" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="scripts/game.js?rev=2"></script>
-	<script type="text/javascript" src="scripts/board.js?rev=2"></script>
-	<script type="text/javascript" src="scripts/snake.js?rev=1"></script>
-	<script type="text/javascript" src="scripts/apple.js?rev=1"></script>
-	<script type="text/javascript" src="scripts/player.js?rev=2"></script>
-	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=3" />
-	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css" />
-	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css" />
+	<script type="text/javascript" src="scripts/game.js?rev=3"></script>
+	<script type="text/javascript" src="scripts/board.js?rev=3"></script>
+	<script type="text/javascript" src="scripts/snake.js?rev=3"></script>
+	<script type="text/javascript" src="scripts/apple.js?rev=3"></script>
+	<script type="text/javascript" src="scripts/player.js?rev=3"></script>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=4" />
+	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=4" />
+	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=4" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" href="assets/apple-icon-60x60.png">
 	<link rel="icon" type="image/png" href="assets/android-icon-72x72.png">
@@ -31,9 +31,9 @@
 		<div id="HomeDev">Josiah<br />Johnson<br />Games&trade;</div>
 		<img id="HomeLogo" src="assets/snake.png" /><br />
 		<p id="HomeDesc">Play the classic snake game on your mobile phone or desktop browser!</p>
-		<input type="button" id="PlayButton" class="MenuButtonFull" value="Play" /><br />
-		<input type="button" id="LeaderboardButton" class="MenuButtonFull" value="Leaderboard" />
-		<!--<input type="button" id="CustomizeButton" class="MenuButtonHalf" value="Customize" />-->
+		<input type="button" id="Home_PlayButton" class="MenuButtonFull" value="Play" /><br />
+		<input type="button" id="Home_LeaderboardButton" class="MenuButtonHalf" value="Leaderboard" />
+		<input type="button" id="Home_CustomizeButton" class="MenuButtonHalf" value="Customize" />
 	</div>
 	<div id="GameDiv" style="display:none;">
 		<div style="float:left;">
@@ -48,6 +48,9 @@
 			<div id="GameInstructionsMobile">Swipe anywhere on screen to move the snake.</div>
 			<div id="GameInstructionsDesktop">Use arrow keys or WASD to move the snake.</div>
 		</div>
+		<div style="margin-top:10px;">
+			<img src="assets/coin.png" class="CoinSmall" /><span id="Coins"></span>
+		</div>
 		<div id="GameOverDiv" style="display:none;">
 			<h1>GAME OVER</h1>
 			<div id="GameOverHiScoreDiv" style="display:none;">NEW HI-SCORE!!</div>
@@ -57,9 +60,13 @@
 			<div>
 				Time: <span id="GameOverTime"></span>
 			</div>
+			<div>
+				<img src="assets/coin.png" class="CoinSmall" /><span id="GameOverCoins"></span>
+			</div>
 			<div style="padding-top:10px;">
-				<input type="button" id="PlayAgainButton" class="PopupButton" value="Play Again" />
-				<input type="button" id="QuitButton" class="PopupButton" value="Quit" />
+				<input type="button" id="GameOver_PlayAgainButton" class="PopupButton" value="Play Again" />
+				<input type="button" id="GameOver_QuitButton" class="PopupButton" value="Quit" />
+				<input type="button" id="GameOver_LeaderboardButton" class="PopupButton" value="Leaderboard" />
 			</div>
 		</div>
 	</div>
@@ -73,6 +80,57 @@
 		</table>
 		<div style="text-align:center; padding-top:20px;">
 			<input type="button" id="Leaderboard_HomeButton" class="MenuButtonHalf" value="Home" />
+		</div>
+	</div>
+	<div id="CustomizeDiv" style="display:none;">
+		<div style="float:right;">
+			<img src="assets/coin.png" class="CoinMedium" /><span id="CustomizeCoins"></span>
+		</div>
+		<h1>Snake Colors</h1>
+		<div id="ItemsDiv">
+			<div id="ItemGreen" class="CustomizeItem" data-cost="0" data-color="#00FF00">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />0</div>
+				<div class="ColorSnake" style="background-color:#00FF00;"></div>
+			</div>
+			<div id="ItemWhite" class="CustomizeItem" data-cost="1000" data-color="#FFFFFF">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />1000</div>
+				<div class="ColorSnake" style="background-color:#FFFFFF;"></div>
+			</div>
+			<div id="ItemBrown" class="CustomizeItem" data-cost="1000" data-color="#663300">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />1000</div>
+				<div class="ColorSnake" style="background-color:#663300;"></div>
+			</div>
+			<div id="ItemYellow" class="CustomizeItem" data-cost="2000" data-color="#FFFF00">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />2000</div>
+				<div class="ColorSnake" style="background-color:#FFFF00;"></div>
+			</div>
+			<div id="ItemRed" class="CustomizeItem" data-cost="2000" data-color="#FF0000">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />2000</div>
+				<div class="ColorSnake" style="background-color:#FF0000;"></div>
+			</div>
+			<div id="ItemBlue" class="CustomizeItem" data-cost="3000" data-color="#0000FF">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />3000</div>
+				<div class="ColorSnake" style="background-color:#0000FF;"></div>
+			</div>
+			<div id="ItemOrange" class="CustomizeItem" data-cost="3000" data-color="#FF4500">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />3000</div>
+				<div class="ColorSnake" style="background-color:#FF4500;"></div>
+			</div>
+			<div id="ItemPurple" class="CustomizeItem" data-cost="5000" data-color="#FF00FF">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />5000</div>
+				<div class="ColorSnake" style="background-color:#FF00FF;"></div>
+			</div>
+			<div id="ItemAqua" class="CustomizeItem" data-cost="5000" data-color="#00FFFF">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />5000</div>
+				<div class="ColorSnake" style="background-color:#00FFFF;"></div>
+			</div>
+			<div id="ItemBlack" class="CustomizeItem" data-cost="10000" data-color="#000000">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />10000</div>
+				<div class="ColorSnake" style="background-color:#000000;"></div>
+			</div>
+		</div>
+		<div style="text-align:center; padding-top:10px;">
+			<input type="button" id="Customize_HomeButton" class="MenuButtonHalf" value="Home" />
 		</div>
 	</div>
 </body>
