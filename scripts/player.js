@@ -5,6 +5,7 @@ class Player
 		this.TouchMinDistance = 30;
 		this.GameOver = true;
 		$("#HiScore").text(this.GetHiScore());
+		$("#Coins").text(this.GetCoins());
 	}
 
 	Initialize()
@@ -137,5 +138,75 @@ class Player
 			scoreArray.push(scoreObj);
 
 		localStorage.setItem("scores", JSON.stringify(scoreArray));
+	}
+
+	GetCoins()
+	{
+		var coins = 0;
+
+		if (localStorage.getItem("coins") != null)
+			coins = parseInt(localStorage.getItem("coins"), 10);
+		else
+			localStorage.setItem("coins", coins);
+
+		return coins;
+	}
+
+	SaveCoins()
+	{
+		var bonus = Math.floor(this.Score / 100) * 10;
+		var newCoins = (this.Score + bonus);
+		$("#GameOverCoins").text(newCoins);
+
+		var coins = this.GetCoins();
+		coins += newCoins;
+		$("#Coins").text(coins);
+
+		localStorage.setItem("coins", coins);
+	}
+
+	GetUnlocks()
+	{
+		var unlocksArray = [];
+
+		if (localStorage.getItem("unlocks") != null)
+			unlocksArray = JSON.parse(localStorage.getItem("unlocks"));
+		else
+		{
+			//unlock green initially
+			var colorObj = {};
+			colorObj.id = "ItemGreen";
+			colorObj.type = "color";
+			colorObj.value = "#00FF00";
+
+			unlocksArray.push(colorObj);
+			localStorage.setItem("unlocks", JSON.stringify(unlocksArray));
+		}
+
+		return unlocksArray;
+	}
+
+	AddUnlock(id, type, value)
+	{
+		var colorObj = {};
+		colorObj.id = id;
+		colorObj.type = type;
+		colorObj.value = value;
+
+		var unlocksArray = this.GetUnlocks();
+		unlocksArray.push(colorObj);
+		localStorage.setItem("unlocks", JSON.stringify(unlocksArray));
+	}
+
+	GetSelectedColor()
+	{
+		var color = "#00FF00";//green
+
+		if (localStorage.getItem("snakecolor") != null)
+			color = localStorage.getItem("snakecolor");
+		else
+			localStorage.setItem("snakecolor", color);
+
+		return color;
 	}
 }

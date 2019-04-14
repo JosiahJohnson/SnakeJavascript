@@ -14,6 +14,7 @@ class Snake
 		this.Positions.push(new Position(0, 0));
 		this.Head = this.Positions[0];
 		this.Tail = this.Positions[this.Positions.length - 1];
+		this.Color = player.GetSelectedColor();
 	}
 
 	ChangePosition()

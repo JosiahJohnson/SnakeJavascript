@@ -12,29 +12,9 @@ $(function ()
 	document.addEventListener("touchstart", TouchStart, { passive: false });
 	document.addEventListener("touchmove", TouchMove, { passive: false });
 
-	$("#PlayButton, #PlayAgainButton").click(function ()
-	{
-		HideAllDivs();
-		$("#GameDiv").show();
-		ResetGame();
-	});
-
-	$("#LeaderboardButton").click(function ()
-	{
-		HideAllDivs();
-		$("#LeaderboardDiv").show();
-		LoadLeaderboard();
-		$("#Leaderboard_HomeButton").focus();
-	});
-
-	$("#QuitButton, #Leaderboard_HomeButton").click(function ()
-	{
-		HideAllDivs();
-		$("#HomeDiv").show();
-		$("#PlayButton").focus();
-	});
+	AttachButtonClickEvents();
 	
-	$("#PlayButton").focus();
+	$("#Home_PlayButton").focus();
 });
 
 function ResetGame()
@@ -69,9 +49,45 @@ function GameLoop()
 		$("#GameOverDiv").show();
 		$("#GameOverScore").text(player.Score);
 		$("#GameOverTime").text(player.GetTimeString());
-		$("#PlayAgainButton").focus();
+		$("#GameOver_PlayAgainButton").focus();
 		player.SaveScore();
+		player.SaveCoins();
 	}
+}
+
+function AttachButtonClickEvents()
+{
+	$("#Home_PlayButton, #GameOver_PlayAgainButton").click(function ()
+	{
+		HideAllDivs();
+		$("#GameDiv").show();
+		ResetGame();
+	});
+
+	$("#Home_LeaderboardButton, #GameOver_LeaderboardButton").click(function ()
+	{
+		HideAllDivs();
+		$("#LeaderboardDiv").show();
+		LoadLeaderboard();
+		$("#Leaderboard_HomeButton").focus();
+	});
+
+	$("#GameOver_QuitButton, #Leaderboard_HomeButton, #Customize_HomeButton").click(function ()
+	{
+		HideAllDivs();
+		$("#HomeDiv").show();
+		$("#Home_PlayButton").focus();
+	});
+
+	$("#Home_CustomizeButton").click(function ()
+	{
+		HideAllDivs();
+		$("#CustomizeDiv").show();
+		LoadCustomizations();
+		$("#Customize_HomeButton").focus();
+	});
+
+	$(".CustomizeItem").click(ColorSelected);
 }
 
 function HideAllDivs()
@@ -81,6 +97,7 @@ function HideAllDivs()
 	$("#GameOverDiv").hide();
 	$("#GameOverHiScoreDiv").hide();
 	$("#LeaderboardDiv").hide();
+	$("#CustomizeDiv").hide();
 }
 
 function KeyPressed(e)
@@ -172,6 +189,74 @@ function LoadLeaderboard()
 		rowsHtml += "<tr class=\"ScoreRow\"><td colspan=\"4\">...maybe try playing the game first!</td>";
 
 	$("#LeaderboardTable").append(rowsHtml);
+}
+
+function LoadCustomizations()
+{
+	$("#CustomizeCoins").text(player.GetCoins());
+
+	//set unlocked colors
+	var unlocksArray = player.GetUnlocks();
+
+	for (var i = 0; i < unlocksArray.length; i++)
+	{
+		var colorObj = unlocksArray[i];
+		var item = $("#" + colorObj.id);
+		item.addClass("Unlocked");
+		item.children(".Cost").text("Purchased");
+	}
+
+	//set selected color
+	var color = player.GetSelectedColor();
+	$(".CustomizeItem[data-color='" + color + "']").addClass("Selected");
+}
+
+function ColorSelected()
+{
+	var item = $(this);
+
+	if (!item.hasClass("Selected"))//selected items require no action
+	{
+		var changeColor = false;
+
+		if (item.hasClass("Unlocked"))
+		{
+			changeColor = true;
+		}
+		else
+		{
+			var cost = parseInt(item.data("cost"), 10);
+			var coins = player.GetCoins();
+
+			if (cost > coins)
+				alert("No enough coins, keep playing!");
+			else
+			{
+				if (confirm("Buy this color?"))
+				{
+					//subtract coins
+					coins -= cost;
+					localStorage.setItem("coins", coins);
+					$("#CustomizeCoins").text(coins);
+
+					//unlock color
+					item.addClass("Unlocked");
+					item.children(".Cost").text("Purchased");
+					player.AddUnlock(item.attr("id"), "color", item.data("color"));
+
+					changeColor = true;
+				}
+			}
+		}
+
+		if (changeColor)
+		{
+			//set selected color
+			$("#ItemsDiv .Selected").removeClass("Selected");
+			item.addClass("Selected");
+			localStorage.setItem("snakecolor", item.data("color"));
+		}
+	}
 }
 
 class Position
