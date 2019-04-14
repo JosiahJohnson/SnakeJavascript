@@ -38,7 +38,7 @@
 {
 	top: 80px;
 	width: 80%;
-	height: 140px;
+	height: 188px;
 }
 #GameOverDiv h1
 {
@@ -54,6 +54,13 @@
 	width: 40%;
 	font-size:1.1em;
 	padding:5px 0;
+	margin-bottom:5px;
+}
+.CoinSmall
+{
+	width:16px;
+	vertical-align:middle;
+	margin-right:2px;
 }
 
 /*Leaderboard*/

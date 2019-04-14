@@ -26,7 +26,7 @@
 }
 
 /*Game*/
-#Score, #HiScore, #GameOverScore, #GameOverTime
+#Score, #HiScore, #GameOverScore, #GameOverTime, #Coins, #GameOverCoins
 {
 	font-weight: bold;
 }
@@ -81,4 +81,47 @@
 #LeaderboardTable td:not(:first-child)
 {
 	text-align: right;
+}
+
+/*Customize*/
+#CustomizeDiv h1
+{
+	margin:10px 0;
+}
+#CustomizeCoins
+{
+	font-size: 1.2em;
+	font-weight:bold;
+}
+#ItemsDiv
+{
+	max-height:380px;
+	overflow-y:auto;
+}
+.CustomizeItem
+{
+	background-color:#e2e2e2;
+	padding: 15px 10px;
+	margin-bottom: 10px;
+}
+.Selected
+{
+	background-color:darkgray;
+}
+.ColorSnake
+{
+	width:60%;
+	height:20px;
+}
+.Cost
+{
+	float:right;
+	font-size:1.2em;
+	font-weight:bold;
+}
+.CoinMedium
+{
+	width: 22px;
+	vertical-align: middle;
+	margin-right: 2px;
 }
