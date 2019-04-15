@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="scripts/apple.js?rev=5"></script>
 	<script type="text/javascript" src="scripts/player.js?rev=5"></script>
 	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=7" />
-	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=7" />
+	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=8" />
 	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=7" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" href="assets/apple-icon-60x60.png">
@@ -36,11 +36,13 @@
 		<input type="button" id="Home_CustomizeButton" class="MenuButtonHalf" value="Customize" />
 	</div>
 	<div id="GameDiv" style="display:none;">
-		<div style="float:left;">
-			Score: <span id="Score"></span>
-		</div>
-		<div style="float:right;">
-			Hi-Score: <span id="HiScore"></span>
+		<div id="ScoresDiv">
+			<div style="float:left;">
+				Score: <span id="Score"></span>
+			</div>
+			<div style="float:right;">
+				Hi-Score: <span id="HiScore"></span>
+			</div>
 		</div>
 		<div style="clear:both; margin-bottom:10px;"></div>
 		<div style="text-align:center;">
@@ -57,7 +59,7 @@
 			<div id="GameOverScoreDiv">
 				Score: <span id="GameOverScore"></span>
 			</div>
-			<span>
+			<span id="TimeAndCoinsSpan">
 				Time: <span id="GameOverTime"></span> &nbsp; <img src="assets/coin.png" class="CoinSmall" /><span id="GameOverCoins"></span>
 			</span>
 			<div style="padding-top:10px;">
