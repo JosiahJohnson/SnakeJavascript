@@ -6,13 +6,15 @@
 }
 input[type='button']
 {
+	-webkit-appearance: none;
+	-moz-appearance: none;
 	font-family: 'Roboto Mono', monospace;
 	outline: 1px solid #000000;
 	background-color: #C0C0C0;
 	border-width: 1px;
 	border-style: solid;
 	border-color: #FFFFFF #808080 #808080 #FFFFFF;
-	padding:0;
+	padding: 0;
 }
 input[type='button']:active
 {
@@ -109,7 +111,7 @@ input[type='button']:active
 }
 #ItemsDiv
 {
-	max-height:70vh;
+	max-height:65vh;
 	overflow-y:auto;
 }
 .CustomizeItem
