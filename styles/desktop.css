@@ -99,3 +99,21 @@
 {
 	font-size: 1.5em;
 }
+
+/*Customize*/
+#CustomizeDiv
+{
+	position: relative;
+	max-width: 1024px;
+	margin: 0 auto;
+}
+#ItemsDiv
+{
+	max-height: 80vh;
+}
+.CustomizeItem
+{
+	float:left;
+	width:300px;
+	margin-right:10px;
+}

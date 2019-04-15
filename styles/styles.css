@@ -108,11 +108,10 @@ input[type='button']:active
 #CustomizeCoins
 {
 	font-size: 1.2em;
-	font-weight:bold;
+	font-weight: bold;
 }
 #ItemsDiv
 {
-	max-height:65vh;
 	overflow-y:auto;
 }
 .CustomizeItem
@@ -132,13 +131,13 @@ input[type='button']:active
 }
 .Cost
 {
-	float:right;
-	font-size:1.2em;
-	font-weight:bold;
+	float: right;
+	font-size: 1.2em;
+	font-weight: bold;
 }
 .CoinMedium
 {
-	width: 22px;
 	vertical-align: middle;
+	width: 22px;
 	margin-right: 2px;
 }

@@ -79,3 +79,9 @@
 {
 	font-size: 1.2em;
 }
+
+/*Customize*/
+#ItemsDiv
+{
+	max-height: 65vh;
+}
