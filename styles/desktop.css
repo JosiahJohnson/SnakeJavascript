@@ -35,7 +35,6 @@
 	position: relative;
 	max-width: 1024px;
 	margin: 0 auto;
-	font-size: 1.5em;
 }
 #GameInstructionsMobile
 {
@@ -43,6 +42,7 @@
 }
 #GameInstructionsDesktop
 {
+	font-size: 1.5em;
 	margin-top: 10px;
 }
 #GameOverDiv
@@ -54,22 +54,23 @@
 #GameOverDiv h1
 {
 	margin: 10px 0;
-	font-size: 3.5em;
+	font-size: 4.5em;
 }
 #GameOverHiScoreDiv
 {
 	width: 70%;
+	font-size:2em;
 }
 #GameOverScoreDiv
 {
-	font-size: 1.5em;
+	font-size: 2em;
 	margin-bottom: 5px;
 }
 .PopupButton
 {
 	width: 150px;
 	height: 50px;
-	font-size: 1.2em;
+	font-size: 1.5em;
 	margin-bottom: 10px;
 }
 .CoinSmall
@@ -77,6 +78,10 @@
 	width: 25px;
 	vertical-align: middle;
 	margin-right: 3px;
+}
+#ScoresDiv, #TimeAndCoinsSpan, #Coins
+{
+	font-size: 1.5em;
 }
 
 /*Leaderboard*/
