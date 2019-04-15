@@ -13,14 +13,14 @@
 	<meta name="description" content="Play the classic snake game on your mobile phone or desktop browser! Hi-score leaderboards, customizations and more!" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="scripts/game.js?rev=3"></script>
-	<script type="text/javascript" src="scripts/board.js?rev=3"></script>
-	<script type="text/javascript" src="scripts/snake.js?rev=3"></script>
-	<script type="text/javascript" src="scripts/apple.js?rev=3"></script>
-	<script type="text/javascript" src="scripts/player.js?rev=3"></script>
-	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=4" />
-	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=4" />
-	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=4" />
+	<script type="text/javascript" src="scripts/game.js?rev=5"></script>
+	<script type="text/javascript" src="scripts/board.js?rev=5"></script>
+	<script type="text/javascript" src="scripts/snake.js?rev=5"></script>
+	<script type="text/javascript" src="scripts/apple.js?rev=5"></script>
+	<script type="text/javascript" src="scripts/player.js?rev=5"></script>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=5" />
+	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=5" />
+	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=5" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" href="assets/apple-icon-60x60.png">
 	<link rel="icon" type="image/png" href="assets/android-icon-72x72.png">
@@ -54,18 +54,15 @@
 		<div id="GameOverDiv" style="display:none;">
 			<h1>GAME OVER</h1>
 			<div id="GameOverHiScoreDiv" style="display:none;">NEW HI-SCORE!!</div>
-			<div>
+			<div id="GameOverScoreDiv">
 				Score: <span id="GameOverScore"></span>
 			</div>
-			<div>
-				Time: <span id="GameOverTime"></span>
-			</div>
-			<div>
-				<img src="assets/coin.png" class="CoinSmall" /><span id="GameOverCoins"></span>
-			</div>
+			<span>
+				Time: <span id="GameOverTime"></span> &nbsp; <img src="assets/coin.png" class="CoinSmall" /><span id="GameOverCoins"></span>
+			</span>
 			<div style="padding-top:10px;">
 				<input type="button" id="GameOver_PlayAgainButton" class="PopupButton" value="Play Again" />
-				<input type="button" id="GameOver_QuitButton" class="PopupButton" value="Quit" />
+				<input type="button" id="GameOver_QuitButton" class="PopupButton" value="Quit" /><br />
 				<input type="button" id="GameOver_LeaderboardButton" class="PopupButton" value="Leaderboard" />
 			</div>
 		</div>
