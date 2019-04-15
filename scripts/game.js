@@ -229,7 +229,7 @@ function ColorSelected()
 			var coins = player.GetCoins();
 
 			if (cost > coins)
-				alert("No enough coins, keep playing!");
+				alert("Not enough coins, keep playing!");
 			else
 			{
 				if (confirm("Buy this color?"))
@@ -238,6 +238,7 @@ function ColorSelected()
 					coins -= cost;
 					localStorage.setItem("coins", coins);
 					$("#CustomizeCoins").text(coins);
+					$("#Coins").text(coins);
 
 					//unlock color
 					item.addClass("Unlocked");

@@ -1,10 +1,5 @@
 class Snake
 {
-	constructor()
-	{
-		this.Color = "#00FF00";
-	}
-
 	Initialize()
 	{
 		this.Dir = Direction.Right;
