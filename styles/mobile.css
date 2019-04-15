@@ -13,14 +13,16 @@
 }
 .MenuButtonFull
 {
-	width: 92%;
-	font-size: 1.7em;
+	font-size: 1.8em;
+	width: 250px;
+	height: 50px;
 	margin-bottom: 10px;
 }
 .MenuButtonHalf
 {
-	width: 45%;
 	font-size: 1.5em;
+	width: 123px;
+	height: 50px;
 	margin-bottom: 10px;
 }
 
@@ -38,7 +40,7 @@
 {
 	top: 80px;
 	width: 80%;
-	height: 193px;
+	height: 225px;
 }
 #GameOverDiv h1
 {
@@ -49,12 +51,17 @@
 {
 	width: 70%;
 }
+#GameOverScoreDiv
+{
+	font-size:1.5em;
+	margin-bottom:5px;
+}
 .PopupButton
 {
-	width: 40%;
-	font-size:1.1em;
-	padding:5px 0;
-	margin-bottom:10px;
+	width: 110px;
+	height:50px;
+	font-size: 1.3em;
+	margin-bottom: 10px;
 }
 .CoinSmall
 {

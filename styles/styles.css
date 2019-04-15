@@ -4,6 +4,20 @@
 	font-family: 'Roboto Mono', monospace;
 	font-size:12px;
 }
+input[type='button']
+{
+	font-family: 'Roboto Mono', monospace;
+	outline: 1px solid #000000;
+	background-color: #C0C0C0;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #FFFFFF #808080 #808080 #FFFFFF;
+	padding:0;
+}
+input[type='button']:active
+{
+	background-color:white;
+}
 
 /*Home*/
 #HomeDiv
@@ -95,7 +109,7 @@
 }
 #ItemsDiv
 {
-	max-height:330px;
+	max-height:70vh;
 	overflow-y:auto;
 }
 .CustomizeItem
