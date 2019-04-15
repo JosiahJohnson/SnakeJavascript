@@ -8,6 +8,7 @@ input[type='button']
 {
 	-webkit-appearance: none;
 	-moz-appearance: none;
+	border-radius:0;
 	font-family: 'Roboto Mono', monospace;
 	outline: 1px solid #000000;
 	background-color: #C0C0C0;
