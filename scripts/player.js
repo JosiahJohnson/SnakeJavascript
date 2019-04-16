@@ -142,7 +142,11 @@ class Player
 		try
 		{
 			//send GA event
-			ga('send', 'event', 'Score', scoreObj.score.toString(), 'Player Score');
+			gtag('event', scoreObj.score.toString(),
+			{
+				'event_category': 'User Stats',
+				'event_label': 'User Score'
+			});
 		}
 		catch (e)
 		{ }
