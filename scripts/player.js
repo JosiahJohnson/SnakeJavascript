@@ -138,6 +138,14 @@ class Player
 			scoreArray.push(scoreObj);
 
 		localStorage.setItem("scores", JSON.stringify(scoreArray));
+		
+		try
+		{
+			//send GA event
+			ga('send', 'event', 'Score', scoreObj.score.toString(), 'Player Score');
+		}
+		catch (e)
+		{ }
 	}
 
 	GetCoins()
