@@ -146,7 +146,7 @@ class Player
 			{
 				'event_category': 'User Stats',
 				'event_label': 'User Score',
-				'event_value': scoreObj.score
+				'value': scoreObj.score
 			});
 		}
 		catch (e)
