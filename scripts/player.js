@@ -138,7 +138,7 @@ class Player
 			scoreArray.push(scoreObj);
 
 		localStorage.setItem("scores", JSON.stringify(scoreArray));
-		
+
 		try
 		{
 			//send GA event

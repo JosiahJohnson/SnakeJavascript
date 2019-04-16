@@ -49,8 +49,8 @@ class Snake
 		}
 
 		//check for collisions
-		if (this.Head.X < 0 || this.Head.X > (board.SizeInPixels - 1) || this.Head.Y < 0 ||
-			this.Head.Y > (board.SizeInPixels - 1) || this.AteSelf())
+		if (this.Head.X < 0 || this.Head.X > (board.GridSize - 1) || this.Head.Y < 0 ||
+			this.Head.Y > (board.GridSize - 1) || this.AteSelf())
 		{
 			player.GameOver = true;
 		}

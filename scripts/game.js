@@ -19,7 +19,7 @@ $(function ()
 
 function ResetGame()
 {
-	board.ClearScreen();
+	board.Initialize();
 	snake.Initialize();
 	apple.RandomizePosition();
 	player.Initialize();
