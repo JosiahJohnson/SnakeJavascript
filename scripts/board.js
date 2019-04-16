@@ -3,7 +3,7 @@ class Board
 	constructor()
 	{
 		this.GridSize = 15;
-		this.PixelsPerSquare = 8;
+		this.PixelsPerSquare = 4;
 		this.GridPixels = this.GridSize * this.PixelsPerSquare;
 		this.LineColor = "#333333";
 
