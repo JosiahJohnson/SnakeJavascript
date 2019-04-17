@@ -2,9 +2,9 @@ class Board
 {
 	constructor()
 	{
-		this.GridSize = 15;
+		this.GridSquares = 15;
 		this.PixelsPerSquare = 6;
-		this.GridPixels = this.GridSize * this.PixelsPerSquare;
+		this.GridPixels = this.GridSquares * this.PixelsPerSquare;
 		this.LineColor = "#333333";
 
 		var width = $(window).width();
@@ -24,7 +24,7 @@ class Board
 
 		this.PixelSize = parseInt((size * percent) / this.GridPixels, 10);
 		this.SquareSize = this.PixelSize * this.PixelsPerSquare;
-		this.CanvasWidth = this.SquareSize * this.GridSize;
+		this.CanvasWidth = this.SquareSize * this.GridSquares;
 		this.CanvasHeight = this.CanvasWidth;
 
 		this.Canvas = document.getElementById("SnakeCanvas");
@@ -56,20 +56,56 @@ class Board
 		this.Ctx.stroke();
 	}
 
-	ClearSnake()
+	ClearSnakeTail()
 	{
-		this.ClearPixel(snake.Positions[snake.Positions.length - 1]);
+		this.ClearSquare(snake.Positions[snake.Positions.length - 1]);
 	}
 
 	DrawSnake()
 	{
-		for (var i = 0; i < snake.Positions.length; i++)
+		//draw head
+		var headParts = snake.GetHeadCoord();
+		this.DrawRectangleArray(snake.Head, headParts);
+
+		//draw body
+		var tailNum = snake.Positions.length - 1;
+		for (var i = 1; i < tailNum; i++)
 		{
-			this.DrawPixel(snake.Positions[i], snake.Color);
+			this.DrawSquare(snake.Positions[i], snake.Color);
+		}
+
+		//draw tail
+		this.ClearSnakeTail();
+		var tailParts = snake.GetTailCoord();
+		this.DrawRectangleArray(snake.Positions[tailNum], tailParts);
+	}
+
+	DrawApple(pos)
+	{
+		var appleParts = apple.GetAppleCoord();
+		this.DrawRectangleArray(pos, appleParts);
+	}
+
+	DrawRectangleArray(pos, rectArray)
+	{
+		for (var i = 0; i < rectArray.length; i++)
+		{
+			this.DrawRectangle(pos, rectArray[i]);
 		}
 	}
 
-	ClearPixel(pos)
+	DrawRectangle(pos, rect)
+	{
+		var x = (pos.X * this.SquareSize) + (this.PixelSize * rect.X);
+		var y = (pos.Y * this.SquareSize) + (this.PixelSize * rect.Y);
+		var width = this.PixelSize * rect.Width;
+		var height = this.PixelSize * rect.Height;
+
+		this.Ctx.fillStyle = rect.Color;
+		this.Ctx.fillRect(x, y, width, height);
+	}
+
+	ClearSquare(pos)
 	{
 		this.Ctx.clearRect(pos.X * this.SquareSize, pos.Y * this.SquareSize, this.SquareSize, this.SquareSize);
 
@@ -80,7 +116,7 @@ class Board
 		this.DrawLine(new Position(lineX, lineY + .5), new Position(lineX + this.SquareSize, lineY + .5), this.LineColor, 1);
 	}
 
-	DrawPixel(pos, color)
+	DrawSquare(pos, color)
 	{
 		this.Ctx.fillStyle = color;
 		this.Ctx.fillRect(pos.X * this.SquareSize, pos.Y * this.SquareSize, this.SquareSize, this.SquareSize);

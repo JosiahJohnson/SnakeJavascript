@@ -32,7 +32,7 @@ function GameLoop()
 	{
 		if (player.Steps > 0)
 		{
-			board.ClearSnake();
+			board.ClearSnakeTail();
 			player.CheckInput();
 			snake.ChangePosition();
 		}
@@ -268,3 +268,16 @@ class Position
 		this.Y = y;
 	}
 }
+
+class Rect
+{
+	constructor(x, y, width, height, color)
+	{
+		this.X = x;
+		this.Y = y;
+		this.Width = width;
+		this.Height = height;
+		this.Color = color;
+	}
+}
+
