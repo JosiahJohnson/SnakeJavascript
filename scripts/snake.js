@@ -98,9 +98,10 @@ class Snake
 	GetTailCoord()
 	{
 		//initialize going right
-		var tail1 = new Rect(0, 2, 3, 2, this.Color);
-		var tail2 = new Rect(3, 1, 3, 4, this.Color);
-		var parts = [tail1, tail2];
+		var tail1 = new Rect(0, 2, 2, 2, this.Color);
+		var tail2 = new Rect(2, 1, 2, 4, this.Color);
+		var tail3 = new Rect(4, 0, 2, 6, this.Color);
+		var parts = [tail1, tail2, tail3];
 		var tailDir = Direction.Right;
 
 		//check position of tail relative to second to last position
