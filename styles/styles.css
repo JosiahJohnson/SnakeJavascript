@@ -54,7 +54,12 @@ input[type='button']:active
 }
 
 /*Game*/
-#Score, #HiScore, #GameOverScore, #GameOverTime, #Coins, #GameOverCoins
+.FloatThird
+{
+	float:left;
+	width:33.33%;
+}
+#Score, #Difficulty, #HiScore, #GameOverScore, #GameOverTime, #Coins, #GameOverCoins
 {
 	font-weight: bold;
 }
