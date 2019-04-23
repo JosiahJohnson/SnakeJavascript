@@ -12,11 +12,15 @@ class Snake
 		];
 		this.Head = this.Positions[0];
 		this.Color = player.GetSelectedColor();
+		var eyeColor = "#FFFFFF";
+
+		if (this.Color == "#FFFFFF")
+			eyeColor = "#ADFFFF";
 
 		this.HeadSprite = new Sprite();
 		this.HeadSprite.Add(new Rect(0, 0, 4, 6, this.Color));
 		this.HeadSprite.Add(new Rect(4, 1, 2, 4, this.Color));
-		this.HeadSprite.Add(new Rect(0, 1, 2, 4, "#FFFFFF"));
+		this.HeadSprite.Add(new Rect(0, 1, 2, 4, eyeColor));
 		this.HeadSprite.Add(new Rect(1, 2, 1, 1, "#000000"));
 		this.HeadSprite.Add(new Rect(1, 4, 1, 1, "#000000"));
 
