@@ -57,7 +57,20 @@ function GameLoop()
 
 function AttachButtonClickEvents()
 {
-	$("#Home_PlayButton, #GameOver_PlayAgainButton").click(function ()
+	$("#Home_PlayButton").click(function ()
+	{
+		$("#DifficultyDiv").show();
+	});
+
+	$("#Home_EasyButton, #Home_MediumButton, #Home_HardButton").click(function ()
+	{
+		player.Difficulty = parseInt($(this).data("difficulty"), 10);
+		HideAllDivs();
+		$("#GameDiv").show();
+		ResetGame();
+	});
+
+	$("#GameOver_PlayAgainButton").click(function ()
 	{
 		HideAllDivs();
 		$("#GameDiv").show();
@@ -92,12 +105,7 @@ function AttachButtonClickEvents()
 
 function HideAllDivs()
 {
-	$("#HomeDiv").hide();
-	$("#GameDiv").hide();
-	$("#GameOverDiv").hide();
-	$("#GameOverHiScoreDiv").hide();
-	$("#LeaderboardDiv").hide();
-	$("#CustomizeDiv").hide();
+	$("#HomeDiv, #DifficultyDiv, #GameDiv, #GameOverDiv, #GameOverHiScoreDiv, #LeaderboardDiv, #CustomizeDiv").hide();
 }
 
 function KeyPressed(e)

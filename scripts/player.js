@@ -47,10 +47,23 @@ class Player
 	{
 		var speed = 200;
 
-		speed -= parseInt(this.Score / 4, 10);
+		if (this.Difficulty > 1)
+		{
+			if (this.Difficulty == 2)
+			{
+				speed -= parseInt(this.Score / 6, 10);
 
-		if (speed < 100)
-			speed = 100;
+				if (speed < 150)
+					speed = 150;
+			}
+			else if (this.Difficulty == 3)
+			{
+				speed -= parseInt(this.Score / 4, 10);
+
+				if (speed < 100)
+					speed = 100;
+			}
+		}
 
 		return speed;
 	}
@@ -114,30 +127,33 @@ class Player
 		scoreObj.timeString = this.GetTimeString();
 		scoreObj.date = new Date();
 
-		var scoreArray = this.GetHiScores();
-
-		//check if new hi-score
-		if (scoreArray.length == 0 || (scoreArray.length > 0 && scoreObj.score > scoreArray[0].score))
+		if (this.Difficulty == 3)
 		{
-			$("#GameOverHiScoreDiv").show();
-			$("#HiScore").text(scoreObj.score);
-		}
+			var scoreArray = this.GetHiScores();
 
-		//limit amount of scores
-		var scoreLimit = 15;
-
-		if (scoreArray.length > (scoreLimit - 1))
-		{
-			if (scoreObj.score > scoreArray[scoreLimit - 1].score)
+			//check if new hi-score
+			if (scoreArray.length == 0 || (scoreArray.length > 0 && scoreObj.score > scoreArray[0].score))
 			{
-				scoreArray.pop();
-				scoreArray.push(scoreObj);
+				$("#GameOverHiScoreDiv").show();
+				$("#HiScore").text(scoreObj.score);
 			}
-		}
-		else
-			scoreArray.push(scoreObj);
 
-		localStorage.setItem("scores", JSON.stringify(scoreArray));
+			//limit amount of scores
+			var scoreLimit = 15;
+
+			if (scoreArray.length > (scoreLimit - 1))
+			{
+				if (scoreObj.score > scoreArray[scoreLimit - 1].score)
+				{
+					scoreArray.pop();
+					scoreArray.push(scoreObj);
+				}
+			}
+			else
+				scoreArray.push(scoreObj);
+
+			localStorage.setItem("scores", JSON.stringify(scoreArray));
+		}
 
 		try
 		{
@@ -176,6 +192,18 @@ class Player
 		$("#Coins").text(coins);
 
 		localStorage.setItem("coins", coins);
+	}
+
+	GetStats()
+	{
+		var statsObj = {};
+
+		return statsObj;
+	}
+
+	SaveStats()
+	{
+
 	}
 
 	GetUnlocks()
