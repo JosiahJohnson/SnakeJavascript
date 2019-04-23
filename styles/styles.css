@@ -41,6 +41,17 @@ input[type='button']:active
 	right:10px;
 	text-align:right;
 }
+#DifficultyDiv
+{
+	background-color: gray;
+	position: absolute;
+	margin: 0 auto;
+	top:150px;
+	left: 0;
+	right: 0;
+	text-align: center;
+	border: 1px solid black;
+}
 
 /*Game*/
 #Score, #HiScore, #GameOverScore, #GameOverTime, #Coins, #GameOverCoins
@@ -60,6 +71,7 @@ input[type='button']:active
 	left: 0;
 	right: 0;
 	text-align: center;
+	border:1px solid black;
 }
 #GameOverDiv h1
 {
