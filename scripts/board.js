@@ -63,10 +63,6 @@ class Board
 
 	DrawSnake()
 	{
-		//draw head
-		var headParts = snake.GetHeadCoord();
-		this.DrawRectangleArray(snake.Head, headParts);
-
 		//draw body
 		var tailNum = snake.Positions.length - 1;
 		for (var i = 1; i < tailNum; i++)
@@ -76,21 +72,22 @@ class Board
 
 		//draw tail
 		this.ClearSnakeTail();
-		var tailParts = snake.GetTailCoord();
-		this.DrawRectangleArray(snake.Positions[tailNum], tailParts);
+		this.DrawSprite(snake.Positions[tailNum], snake.TailSprite);
+
+		//draw head
+		this.DrawSprite(snake.Head, snake.HeadSprite);
 	}
 
 	DrawApple(pos)
 	{
-		var appleParts = apple.GetAppleCoord();
-		this.DrawRectangleArray(pos, appleParts);
+		this.DrawSprite(pos, apple.AppleSprite);
 	}
 
-	DrawRectangleArray(pos, rectArray)
+	DrawSprite(pos, sprite)
 	{
-		for (var i = 0; i < rectArray.length; i++)
+		for (var i = 0; i < sprite.Rects.length; i++)
 		{
-			this.DrawRectangle(pos, rectArray[i]);
+			this.DrawRectangle(pos, sprite.Rects[i]);
 		}
 	}
 
@@ -120,5 +117,69 @@ class Board
 	{
 		this.Ctx.fillStyle = color;
 		this.Ctx.fillRect(pos.X * this.SquareSize, pos.Y * this.SquareSize, this.SquareSize, this.SquareSize);
+	}
+}
+
+class Rect
+{
+	constructor(x, y, width, height, color)
+	{
+		this.X = x;
+		this.Y = y;
+		this.Width = width;
+		this.Height = height;
+		this.Color = color;
+	}
+
+	RotateClockwise()
+	{
+		var temp = this.Clone();
+		this.X = board.PixelsPerSquare - (temp.Y + temp.Height);
+		this.Y = temp.X;
+		this.Width = temp.Height;
+		this.Height = temp.Width;
+	}
+
+	RotateCounterClockwise()
+	{
+		var temp = this.Clone();
+		this.X = temp.Y;
+		this.Y = board.PixelsPerSquare - (temp.X + temp.Width);
+		this.Width = temp.Height;
+		this.Height = temp.Width;
+	}
+
+	Clone()
+	{
+		return new Rect(this.X, this.Y, this.Width, this.Height, this.Color);
+	}
+}
+
+class Sprite
+{
+	constructor()
+	{
+		this.Rects = [];
+	}
+
+	Add(rect)
+	{
+		this.Rects.push(rect);
+	}
+
+	RotateClockwise()
+	{
+		for (var i = 0; i < this.Rects.length; i++)
+		{
+			this.Rects[i].RotateClockwise();
+		}
+	}
+
+	RotateCounterClockwise()
+	{
+		for (var i = 0; i < this.Rects.length; i++)
+		{
+			this.Rects[i].RotateCounterClockwise();
+		}
 	}
 }

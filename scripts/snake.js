@@ -3,12 +3,27 @@ class Snake
 	Initialize()
 	{
 		this.Dir = Direction.Right;
-		this.Positions = [];
-		this.Positions.push(new Position(2, 0));
-		this.Positions.push(new Position(1, 0));
-		this.Positions.push(new Position(0, 0));
+		this.PrevDir = Direction.Right;
+		this.PrevTailDir = Direction.Right;
+		this.Positions = [
+			new Position(2, 0),
+			new Position(1, 0),
+			new Position(0, 0)
+		];
 		this.Head = this.Positions[0];
 		this.Color = player.GetSelectedColor();
+
+		this.HeadSprite = new Sprite();
+		this.HeadSprite.Add(new Rect(0, 0, 4, 6, this.Color));
+		this.HeadSprite.Add(new Rect(4, 1, 2, 4, this.Color));
+		this.HeadSprite.Add(new Rect(0, 1, 2, 4, "#FFFFFF"));
+		this.HeadSprite.Add(new Rect(1, 2, 1, 1, "#000000"));
+		this.HeadSprite.Add(new Rect(1, 4, 1, 1, "#000000"));
+
+		this.TailSprite = new Sprite();
+		this.TailSprite.Add(new Rect(0, 2, 2, 2, this.Color));
+		this.TailSprite.Add(new Rect(2, 1, 2, 4, this.Color));
+		this.TailSprite.Add(new Rect(4, 0, 2, 6, this.Color));
 	}
 
 	ChangePosition()
@@ -54,6 +69,9 @@ class Snake
 		{
 			player.GameOver = true;
 		}
+
+		this.CheckHeadSpriteChanged();
+		this.CheckTailSpriteChanged();
 	}
 
 	AteSelf()
@@ -72,42 +90,26 @@ class Snake
 		return ateSelf;
 	}
 
-	GetHeadCoord()
+	CheckHeadSpriteChanged()
 	{
-		//initialize facing right direction
-		var head1 = new Rect(0, 0, 4, 6, this.Color);
-		var head2 = new Rect(4, 1, 2, 4, this.Color);
-		var eyes = new Rect(0, 1, 2, 4, "#FFFFFF");
-		var pupil1 = new Rect(1, 2, 1, 1, "#000000");
-		var pupil2 = new Rect(1, 4, 1, 1, "#000000");
-		var parts = [head1, head2, eyes, pupil1, pupil2];
-
-		for (var i = 0; i < parts.length; i++)
+		if (this.Dir != this.PrevDir)
 		{
-			switch (this.Dir)
-			{
-				case Direction.Left: this.FlipHorz(parts[i]); break;
-				case Direction.Down: this.RotateClockwise(parts[i]); break;
-				case Direction.Up: this.RotateCounterClockwise(parts[i]); break;
-			}
+			if (this.ShouldRotateClockwise(this.PrevDir, this.Dir))
+				this.HeadSprite.RotateClockwise();
+			else
+				this.HeadSprite.RotateCounterClockwise();
+			
+			this.PrevDir = this.Dir;
 		}
-
-		return parts;
 	}
 
-	GetTailCoord()
+	CheckTailSpriteChanged()
 	{
-		//initialize going right
-		var tail1 = new Rect(0, 2, 2, 2, this.Color);
-		var tail2 = new Rect(2, 1, 2, 4, this.Color);
-		var tail3 = new Rect(4, 0, 2, 6, this.Color);
-		var parts = [tail1, tail2, tail3];
-		var tailDir = Direction.Right;
-
 		//check position of tail relative to second to last position
 		var tailNum = this.Positions.length - 1;
 		var tailPos = this.Positions[tailNum];
 		var secPos = this.Positions[tailNum - 1];
+		var tailDir = Direction.Right;
 
 		if (tailPos.X == secPos.X)
 		{
@@ -119,39 +121,22 @@ class Snake
 		else if (tailPos.X > secPos.X)
 			tailDir = Direction.Left;
 
-		for (var i = 0; i < parts.length; i++)
+		if (tailDir != this.PrevTailDir)
 		{
-			switch (tailDir)
-			{
-				case Direction.Left: this.FlipHorz(parts[i]); break;
-				case Direction.Down: this.RotateClockwise(parts[i]); break;
-				case Direction.Up: this.RotateCounterClockwise(parts[i]); break;
-			}
+			if (this.ShouldRotateClockwise(this.PrevTailDir, tailDir))
+				this.TailSprite.RotateClockwise();
+			else
+				this.TailSprite.RotateCounterClockwise();
+
+			this.PrevTailDir = tailDir;
 		}
-
-		return parts;
 	}
 
-	FlipHorz(rect)
+	ShouldRotateClockwise(prevDir, newDir)
 	{
-		rect.X = board.PixelsPerSquare - (rect.X + rect.Width);
-	}
-
-	RotateClockwise(rect)
-	{
-		var temp = new Rect(rect.X, rect.Y, rect.Width, rect.Height, rect.Color);
-		rect.X = temp.Y;
-		rect.Y = temp.X;
-		rect.Width = temp.Height;
-		rect.Height = temp.Width;
-	}
-
-	RotateCounterClockwise(rect)
-	{
-		var temp = new Rect(rect.X, rect.Y, rect.Width, rect.Height, rect.Color);
-		rect.X = temp.Y;
-		rect.Y = board.PixelsPerSquare - (temp.X + temp.Width);
-		rect.Width = temp.Height;
-		rect.Height = temp.Width;
+		return ((prevDir == Direction.Up && newDir == Direction.Right) ||
+				(prevDir == Direction.Right && newDir == Direction.Down) ||
+				(prevDir == Direction.Down && newDir == Direction.Left) ||
+				(prevDir == Direction.Left && newDir == Direction.Up));
 	}
 }
