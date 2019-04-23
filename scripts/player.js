@@ -47,16 +47,16 @@ class Player
 	{
 		var speed = 200;
 
-		if (this.Difficulty > 1)
+		if (this.Diff > Difficulty.Easy)
 		{
-			if (this.Difficulty == 2)
+			if (this.Diff == Difficulty.Medium)
 			{
 				speed -= parseInt(this.Score / 6, 10);
 
 				if (speed < 150)
 					speed = 150;
 			}
-			else if (this.Difficulty == 3)
+			else if (this.Diff == Difficulty.Hard)
 			{
 				speed -= parseInt(this.Score / 4, 10);
 
@@ -127,7 +127,7 @@ class Player
 		scoreObj.timeString = this.GetTimeString();
 		scoreObj.date = new Date();
 
-		if (this.Difficulty == 3)
+		if (this.Diff == Difficulty.Hard)
 		{
 			var scoreArray = this.GetHiScores();
 

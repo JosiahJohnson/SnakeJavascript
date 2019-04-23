@@ -1,5 +1,6 @@
 var board, snake, apple, player;
 const Direction = { "Up": 0, "Down": 1, "Left": 2, "Right": 3 };
+const Difficulty = { "Easy": 1, "Medium": 2, "Hard": 3 };
 
 $(function ()
 {
@@ -60,13 +61,15 @@ function AttachButtonClickEvents()
 	$("#Home_PlayButton").click(function ()
 	{
 		$("#DifficultyDiv").show();
+		$("#Home_HardButton").focus();
 	});
 
 	$("#Home_EasyButton, #Home_MediumButton, #Home_HardButton").click(function ()
 	{
-		player.Difficulty = parseInt($(this).data("difficulty"), 10);
+		player.Diff = parseInt($(this).data("difficulty"), 10);
 		HideAllDivs();
 		$("#GameDiv").show();
+		$("#Difficulty").text(GetKeyByValue(Difficulty, player.Diff));
 		ResetGame();
 	});
 
@@ -266,6 +269,11 @@ function ColorSelected()
 			localStorage.setItem("snakecolor", item.data("color"));
 		}
 	}
+}
+
+function GetKeyByValue(object, value)
+{
+	return Object.keys(object).find(key => object[key] == value);
 }
 
 class Position
