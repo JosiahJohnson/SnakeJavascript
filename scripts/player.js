@@ -4,7 +4,7 @@ class Player
 	{
 		this.TouchMinDistance = 30;
 		this.GameOver = true;
-		$("#HiScore").text(this.GetHiScore());
+		this.Diff = Difficulty.Hard;
 		$("#Coins").text(this.GetCoins());
 	}
 
@@ -16,6 +16,7 @@ class Player
 		this.Time = 0;
 		this.GameOver = false;
 		$("#Score").text(this.Score);
+		$("#HiScore").text(this.GetHiScore());
 	}
 
 	CheckInput()
@@ -108,8 +109,15 @@ class Player
 	GetHiScores()
 	{
 		var scoreArray = [];
+		var key = "scores" + this.Diff;
 
-		if (localStorage.getItem("scores") != null)
+		if (localStorage.getItem(key) != null)
+		{
+			scoreArray = JSON.parse(localStorage.getItem(key));
+			scoreArray.sort((a, b) => b.score - a.score);//sort desc
+		}
+		//THIS CAN BE DELETED SOMETIME IN THE FUTURE.
+		else if (this.Diff == Difficulty.Hard && localStorage.getItem("scores") != null)
 		{
 			scoreArray = JSON.parse(localStorage.getItem("scores"));
 			scoreArray.sort((a, b) => b.score - a.score);//sort desc
@@ -127,33 +135,30 @@ class Player
 		scoreObj.timeString = this.GetTimeString();
 		scoreObj.date = new Date();
 
-		if (this.Diff == Difficulty.Hard)
+		var scoreArray = this.GetHiScores();
+
+		//check if new hi-score
+		if (scoreArray.length == 0 || (scoreArray.length > 0 && scoreObj.score > scoreArray[0].score))
 		{
-			var scoreArray = this.GetHiScores();
-
-			//check if new hi-score
-			if (scoreArray.length == 0 || (scoreArray.length > 0 && scoreObj.score > scoreArray[0].score))
-			{
-				$("#GameOverHiScoreDiv").show();
-				$("#HiScore").text(scoreObj.score);
-			}
-
-			//limit amount of scores
-			var scoreLimit = 15;
-
-			if (scoreArray.length > (scoreLimit - 1))
-			{
-				if (scoreObj.score > scoreArray[scoreLimit - 1].score)
-				{
-					scoreArray.pop();
-					scoreArray.push(scoreObj);
-				}
-			}
-			else
-				scoreArray.push(scoreObj);
-
-			localStorage.setItem("scores", JSON.stringify(scoreArray));
+			$("#GameOverHiScoreDiv").show();
+			$("#HiScore").text(scoreObj.score);
 		}
+
+		//limit amount of scores
+		var scoreLimit = 15;
+
+		if (scoreArray.length > (scoreLimit - 1))
+		{
+			if (scoreObj.score > scoreArray[scoreLimit - 1].score)
+			{
+				scoreArray.pop();
+				scoreArray.push(scoreObj);
+			}
+		}
+		else
+			scoreArray.push(scoreObj);
+
+		localStorage.setItem("scores" + this.Diff, JSON.stringify(scoreArray));
 
 		try
 		{

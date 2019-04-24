@@ -88,6 +88,12 @@ function AttachButtonClickEvents()
 		$("#Leaderboard_HomeButton").focus();
 	});
 
+	$("#Leaderboard_EasyButton, #Leaderboard_MediumButton, #Leaderboard_HardButton").click(function ()
+	{
+		player.Diff = parseInt($(this).data("difficulty"), 10);
+		LoadLeaderboard();
+	});
+
 	$("#GameOver_QuitButton, #Leaderboard_HomeButton, #Customize_HomeButton").click(function ()
 	{
 		HideAllDivs();
@@ -180,6 +186,9 @@ function TouchMove(e)
 
 function LoadLeaderboard()
 {
+	$("#LeaderboardButtonsDiv .Active").removeClass("Active");
+	$("#Leaderboard_" + GetKeyByValue(Difficulty, player.Diff) + "Button").addClass("Active");
+
 	var scoreArray = player.GetHiScores();
 	var rowsHtml = "";
 	$("#LeaderboardTable tr.ScoreRow").remove();
