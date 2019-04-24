@@ -63,16 +63,17 @@ class Board
 
 	DrawSnake()
 	{
-		//draw body
-		var tailNum = snake.Positions.length - 1;
-		for (var i = 1; i < tailNum; i++)
-		{
-			this.DrawSquare(snake.Positions[i], snake.Color);
-		}
+		//draw body. only need to draw the position after head
+		this.ClearSquare(snake.Positions[1]);
+
+		if (snake.ChangedDirection)
+			this.DrawSprite(snake.Positions[1], snake.GetCurveSprite());
+		else
+			this.DrawSquare(snake.Positions[1], snake.Color);
 
 		//draw tail
 		this.ClearSnakeTail();
-		this.DrawSprite(snake.Positions[tailNum], snake.TailSprite);
+		this.DrawSprite(snake.Positions[snake.Positions.length - 1], snake.TailSprite);
 
 		//draw head
 		this.DrawSprite(snake.Head, snake.HeadSprite);

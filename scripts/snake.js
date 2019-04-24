@@ -5,6 +5,7 @@ class Snake
 		this.Dir = Direction.Right;
 		this.PrevDir = Direction.Right;
 		this.PrevTailDir = Direction.Right;
+		this.ChangedDirection = false;
 		this.Positions = [
 			new Position(2, 0),
 			new Position(1, 0),
@@ -96,6 +97,8 @@ class Snake
 
 	CheckHeadSpriteChanged()
 	{
+		this.ChangedDirection = false;
+
 		if (this.Dir != this.PrevDir)
 		{
 			if (this.ShouldRotateClockwise(this.PrevDir, this.Dir))
@@ -104,6 +107,7 @@ class Snake
 				this.HeadSprite.RotateCounterClockwise();
 			
 			this.PrevDir = this.Dir;
+			this.ChangedDirection = true;
 		}
 	}
 
@@ -142,5 +146,72 @@ class Snake
 				(prevDir == Direction.Right && newDir == Direction.Down) ||
 				(prevDir == Direction.Down && newDir == Direction.Left) ||
 				(prevDir == Direction.Left && newDir == Direction.Up));
+	}
+
+	//optimize later
+	GetCurveSprite()
+	{
+		var sprite = new Sprite();
+		sprite.Add(new Rect(0, 2, 1, 4, this.Color));
+		sprite.Add(new Rect(1, 1, 1, 5, this.Color));
+		sprite.Add(new Rect(2, 0, 4, 6, this.Color));
+
+		var before = this.Head;
+		var after = this.Positions[2];
+
+		if (this.Dir == Direction.Up)
+		{
+			if (before.X > after.X)
+			{
+				//bottom right
+				sprite.RotateClockwise();
+				sprite.RotateClockwise();
+			}
+			else
+			{
+				//bottom left
+				sprite.RotateCounterClockwise();
+			}
+		}
+		else if (this.Dir == Direction.Down)
+		{
+			if (before.X > after.X)
+			{
+				//top right
+				sprite.RotateClockwise();
+			}
+			else
+			{
+				//top left
+			}
+		}
+		else if (this.Dir == Direction.Left)
+		{
+			if (before.Y > after.Y)
+			{
+				//bottom right
+				sprite.RotateClockwise();
+				sprite.RotateClockwise();
+			}
+			else
+			{
+				//top right
+				sprite.RotateClockwise();
+			}
+		}
+		else if (this.Dir == Direction.Right)
+		{
+			if (before.Y > after.Y)
+			{
+				//bottom left
+				sprite.RotateCounterClockwise();
+			}
+			else
+			{
+				//top left
+			}
+		}
+
+		return sprite;
 	}
 }
