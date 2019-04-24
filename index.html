@@ -13,14 +13,14 @@
 	<meta name="description" content="Play the classic snake game on your mobile phone or desktop browser! Hi-score leaderboards, customizations and more!" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="scripts/game.js?rev=11"></script>
-	<script type="text/javascript" src="scripts/board.js?rev=9"></script>
-	<script type="text/javascript" src="scripts/snake.js?rev=9"></script>
-	<script type="text/javascript" src="scripts/apple.js?rev=9"></script>
-	<script type="text/javascript" src="scripts/player.js?rev=11"></script>
-	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=11" />
-	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=9" />
-	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=11" />
+	<script type="text/javascript" src="scripts/game.js?rev=12"></script>
+	<script type="text/javascript" src="scripts/board.js?rev=12"></script>
+	<script type="text/javascript" src="scripts/snake.js?rev=12"></script>
+	<script type="text/javascript" src="scripts/apple.js?rev=12"></script>
+	<script type="text/javascript" src="scripts/player.js?rev=12"></script>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=12" />
+	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=12" />
+	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=12" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" href="assets/apple-icon-60x60.png">
 	<link rel="icon" type="image/png" href="assets/android-icon-72x72.png">
@@ -39,7 +39,6 @@
 			<input type="button" id="Home_EasyButton" class="PopupButton" value="Easy" data-difficulty="1" />
 			<input type="button" id="Home_MediumButton" class="PopupButton" value="Medium" data-difficulty="2" />
 			<input type="button" id="Home_HardButton" class="PopupButton" value="Hard" data-difficulty="3" />
-			<p>Easy and Medium Leaderboards Coming Soon!</p>
 		</div>
 	</div>
 	<div id="GameDiv" style="display:none;">
@@ -81,7 +80,7 @@
 		</div>
 	</div>
 	<div id="LeaderboardDiv" style="display:none;">
-		<div id="LeaderboardButtonsDiv" style="text-align:center;">
+		<div id="LeaderboardButtonsDiv">
 			<input type="button" id="Leaderboard_EasyButton" class="MenuButtonSmall" value="Easy" data-difficulty="1" />
 			<input type="button" id="Leaderboard_MediumButton" class="MenuButtonSmall" value="Medium" data-difficulty="2" />
 			<input type="button" id="Leaderboard_HardButton" class="MenuButtonSmall" value="Hard" data-difficulty="3" />
