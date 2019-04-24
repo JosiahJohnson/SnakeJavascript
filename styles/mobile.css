@@ -11,6 +11,10 @@
 {
 	font-size: .8em;
 }
+#DifficultyDiv
+{
+	max-width: 300px;
+}
 .MenuButtonFull
 {
 	font-size: 1.8em;

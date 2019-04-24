@@ -92,10 +92,14 @@ input[type='button']:active, .Active
 }
 
 /*Leaderboard*/
+#LeaderboardButtonsDiv
+{
+	text-align:center;
+}
 #LeaderboardTable
 {
-	border:1px solid white;
-	border-collapse:collapse;
+	border: 1px solid white;
+	border-collapse: collapse;
 }
 #LeaderboardTable th
 {
