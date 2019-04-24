@@ -53,17 +53,27 @@ function GameLoop()
 		$("#GameOver_PlayAgainButton").focus();
 		player.SaveScore();
 		player.SaveCoins();
+		player.SaveStats();
 	}
 }
 
 function AttachButtonClickEvents()
 {
+	//home screen
 	$("#Home_PlayButton").click(function ()
 	{
 		$("#DifficultyDiv").show();
 		$("#Home_HardButton").focus();
 	});
 
+	$("#GameOver_QuitButton, #Leaderboard_HomeButton, #Customize_HomeButton").click(function ()
+	{
+		HideAllDivs();
+		$("#HomeDiv").show();
+		$("#Home_PlayButton").focus();
+	});
+
+	//game screen
 	$("#Home_EasyButton, #Home_MediumButton, #Home_HardButton").click(function ()
 	{
 		player.Diff = parseInt($(this).data("difficulty"), 10);
@@ -80,6 +90,7 @@ function AttachButtonClickEvents()
 		ResetGame();
 	});
 
+	//leaderboard screen
 	$("#Home_LeaderboardButton, #GameOver_LeaderboardButton").click(function ()
 	{
 		HideAllDivs();
@@ -94,13 +105,7 @@ function AttachButtonClickEvents()
 		LoadLeaderboard();
 	});
 
-	$("#GameOver_QuitButton, #Leaderboard_HomeButton, #Customize_HomeButton").click(function ()
-	{
-		HideAllDivs();
-		$("#HomeDiv").show();
-		$("#Home_PlayButton").focus();
-	});
-
+	//customize screen
 	$("#Home_CustomizeButton").click(function ()
 	{
 		HideAllDivs();
@@ -186,9 +191,11 @@ function TouchMove(e)
 
 function LoadLeaderboard()
 {
+	//set active button
 	$("#LeaderboardButtonsDiv .Active").removeClass("Active");
 	$("#Leaderboard_" + GetKeyByValue(Difficulty, player.Diff) + "Button").addClass("Active");
 
+	//generate table
 	var scoreArray = player.GetHiScores();
 	var rowsHtml = "";
 	$("#LeaderboardTable tr.ScoreRow").remove();

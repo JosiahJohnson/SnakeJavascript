@@ -203,12 +203,40 @@ class Player
 	{
 		var statsObj = {};
 
+		if (localStorage.getItem("stats") != null)
+			statsObj = JSON.parse(localStorage.getItem("stats"));
+		else
+		{
+			statsObj.easyGames = 0;
+			statsObj.mediumGames = 0;
+			statsObj.hardGames = 0;
+			statsObj.insaneGames = 0;
+			statsObj.score = 0;
+			statsObj.steps = 0;
+			statsObj.timeMS = 0;
+
+			localStorage.setItem("stats", JSON.stringify(statsObj));
+		}
+
 		return statsObj;
 	}
 
 	SaveStats()
 	{
+		var statsObj = this.GetStats();
 
+		switch (this.Diff)
+		{
+			case Difficulty.Easy: statsObj.easyGames++; break;
+			case Difficulty.Medium: statsObj.mediumGames++; break;
+			case Difficulty.Hard: statsObj.hardGames++; break;
+		}
+
+		statsObj.score += this.Score;
+		statsObj.steps += this.Steps;
+		statsObj.timeMS += this.Time;
+
+		localStorage.setItem("stats", JSON.stringify(statsObj));
 	}
 
 	GetUnlocks()
