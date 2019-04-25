@@ -13,14 +13,14 @@
 	<meta name="description" content="Play the classic snake game on your mobile phone or desktop browser! Hi-score leaderboards, customizations and more!" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="scripts/game.js?rev=12"></script>
-	<script type="text/javascript" src="scripts/board.js?rev=12"></script>
-	<script type="text/javascript" src="scripts/snake.js?rev=12"></script>
-	<script type="text/javascript" src="scripts/apple.js?rev=12"></script>
-	<script type="text/javascript" src="scripts/player.js?rev=12"></script>
-	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=12" />
-	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=12" />
-	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=12" />
+	<script type="text/javascript" src="scripts/game.js?rev=13"></script>
+	<script type="text/javascript" src="scripts/board.js?rev=13"></script>
+	<script type="text/javascript" src="scripts/snake.js?rev=13"></script>
+	<script type="text/javascript" src="scripts/apple.js?rev=13"></script>
+	<script type="text/javascript" src="scripts/player.js?rev=13"></script>
+	<link rel="stylesheet" type="text/css" href="styles/styles.css?rev=13" />
+	<link rel="stylesheet" type="text/css" media="(min-width:769px)" href="styles/desktop.css?rev=13" />
+	<link rel="stylesheet" type="text/css" media="only screen and (max-width:768px)" href="styles/mobile.css?rev=13" />
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" href="assets/apple-icon-60x60.png">
 	<link rel="icon" type="image/png" href="assets/android-icon-72x72.png">
@@ -145,6 +145,10 @@
 			<div id="ItemAqua" class="CustomizeItem" data-cost="5000" data-color="#00FFFF">
 				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />5000</div>
 				<div class="ColorSnake" style="background-color:#00FFFF;"></div>
+			</div>
+			<div id="ItemRainbow" class="CustomizeItem" data-cost="8000" data-color="#FF0000,#FFA500,#FFFF00,#00FF00,#0000FF,#800080,#FF00FF">
+				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />8000</div>
+				<div class="ColorSnake" style="background:linear-gradient(to right, #FF0000, #FFA500, #FFFF00, #00FF00, #0000FF, #800080, #FF00FF);"></div>
 			</div>
 			<div id="ItemBlack" class="CustomizeItem" data-cost="10000" data-color="#000000">
 				<div class="Cost"><img src="assets/coin.png" class="CoinMedium" />10000</div>
