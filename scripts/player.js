@@ -52,7 +52,7 @@ class Player
 		{
 			if (this.Diff == Difficulty.Medium)
 			{
-				speed -= parseInt(this.Score / 6, 10);
+				speed -= parseInt(this.Score / 8, 10);
 
 				if (speed < 150)
 					speed = 150;
@@ -65,7 +65,7 @@ class Player
 					speed = 100;
 			}
 		}
-
+		
 		return speed;
 	}
 

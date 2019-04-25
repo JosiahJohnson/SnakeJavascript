@@ -12,23 +12,70 @@ class Snake
 			new Position(0, 0)
 		];
 		this.Head = this.Positions[0];
-		this.Color = player.GetSelectedColor();
+
+		//check for multi color skins
+		var color = player.GetSelectedColor();
+		this.ColorIndex = 0;
+
+		if (color.includes(","))
+			this.Colors = color.split(",");
+		else
+			this.Colors = [color];
+
 		var eyeColor = "#FFFFFF";
 
-		if (this.Color == "#FFFFFF")
+		if (color == "#FFFFFF")
 			eyeColor = "#ADFFFF";
 
 		this.HeadSprite = new Sprite();
-		this.HeadSprite.Add(new Rect(0, 0, 4, 6, this.Color));
-		this.HeadSprite.Add(new Rect(4, 1, 2, 4, this.Color));
+		this.HeadSprite.Add(new Rect(0, 0, 4, 6, this.Colors[0]));
+		this.HeadSprite.Add(new Rect(4, 1, 2, 4, this.Colors[0]));
 		this.HeadSprite.Add(new Rect(0, 1, 2, 4, eyeColor));
 		this.HeadSprite.Add(new Rect(1, 2, 1, 1, "#000000"));
 		this.HeadSprite.Add(new Rect(1, 4, 1, 1, "#000000"));
 
 		this.TailSprite = new Sprite();
-		this.TailSprite.Add(new Rect(0, 2, 2, 2, this.Color));
-		this.TailSprite.Add(new Rect(2, 1, 2, 4, this.Color));
-		this.TailSprite.Add(new Rect(4, 0, 2, 6, this.Color));
+		this.TailSprite.Add(new Rect(0, 2, 2, 2, this.Colors[0]));
+		this.TailSprite.Add(new Rect(2, 1, 2, 4, this.Colors[0]));
+		this.TailSprite.Add(new Rect(4, 0, 2, 6, this.Colors[0]));
+	}
+
+	GetColor()
+	{
+		var color = this.Colors[this.ColorIndex];
+
+		if (this.Colors.length > 1)
+		{
+			//increment index if multi color
+			this.ColorIndex++;
+
+			if (this.ColorIndex > (this.Colors.length - 1))
+				this.ColorIndex = 0;
+		}
+
+		return color;
+	}
+
+	GetTailColor()
+	{
+		var color = this.Colors[0];
+
+		if (this.Colors.length > 1)
+		{
+			var tailIndex = this.ColorIndex;
+
+			for (var i = 0; i < (this.Positions.length - 1); i++)
+			{
+				tailIndex--;
+
+				if (tailIndex < 0)
+					tailIndex = (this.Colors.length - 1);
+			}
+
+			color = this.Colors[tailIndex];
+		}
+
+		return color;
 	}
 
 	ChangePosition()
@@ -148,68 +195,27 @@ class Snake
 				(prevDir == Direction.Left && newDir == Direction.Up));
 	}
 
-	//optimize later
 	GetCurveSprite()
 	{
 		var sprite = new Sprite();
-		sprite.Add(new Rect(0, 2, 1, 4, this.Color));
-		sprite.Add(new Rect(1, 1, 1, 5, this.Color));
-		sprite.Add(new Rect(2, 0, 4, 6, this.Color));
+		sprite.Add(new Rect(0, 2, 1, 4, this.Colors[0]));
+		sprite.Add(new Rect(1, 1, 1, 5, this.Colors[0]));
+		sprite.Add(new Rect(2, 0, 4, 6, this.Colors[0]));
 
 		var before = this.Head;
 		var after = this.Positions[2];
 
-		if (this.Dir == Direction.Up)
+		if ((this.Dir == Direction.Down && before.X > after.X) || (this.Dir == Direction.Left && before.Y < after.Y))
 		{
-			if (before.X > after.X)
-			{
-				//bottom right
-				sprite.RotateClockwise();
-				sprite.RotateClockwise();
-			}
-			else
-			{
-				//bottom left
-				sprite.RotateCounterClockwise();
-			}
+			sprite.RotateClockwise();
 		}
-		else if (this.Dir == Direction.Down)
+		else if ((this.Dir == Direction.Up && before.X < after.X) || (this.Dir == Direction.Right && before.Y > after.Y))
 		{
-			if (before.X > after.X)
-			{
-				//top right
-				sprite.RotateClockwise();
-			}
-			else
-			{
-				//top left
-			}
+			sprite.RotateCounterClockwise();
 		}
-		else if (this.Dir == Direction.Left)
+		else if ((this.Dir == Direction.Up && before.X > after.X) || (this.Dir == Direction.Left && before.Y > after.Y))
 		{
-			if (before.Y > after.Y)
-			{
-				//bottom right
-				sprite.RotateClockwise();
-				sprite.RotateClockwise();
-			}
-			else
-			{
-				//top right
-				sprite.RotateClockwise();
-			}
-		}
-		else if (this.Dir == Direction.Right)
-		{
-			if (before.Y > after.Y)
-			{
-				//bottom left
-				sprite.RotateCounterClockwise();
-			}
-			else
-			{
-				//top left
-			}
+			sprite.FlipHorzAndVert();
 		}
 
 		return sprite;

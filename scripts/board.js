@@ -63,17 +63,36 @@ class Board
 
 	DrawSnake()
 	{
+		//get color for head and body
+		var color = snake.GetColor();
+		snake.HeadSprite.Rects[0].Color = color;
+		snake.HeadSprite.Rects[1].Color = color;
+
 		//draw body. only need to draw the position after head
 		this.ClearSquare(snake.Positions[1]);
 
 		if (snake.ChangedDirection)
-			this.DrawSprite(snake.Positions[1], snake.GetCurveSprite());
+		{
+			var curve = snake.GetCurveSprite();
+			curve.Rects[0].Color = color;
+			curve.Rects[1].Color = color;
+			curve.Rects[2].Color = color;
+
+			this.DrawSprite(snake.Positions[1], curve);
+		}
 		else
-			this.DrawSquare(snake.Positions[1], snake.Color);
+			this.DrawSquare(snake.Positions[1], color);
 
 		//draw tail
 		this.ClearSnakeTail();
-		this.DrawSprite(snake.Positions[snake.Positions.length - 1], snake.TailSprite);
+		var tailColor = snake.GetTailColor();
+
+		var tail = snake.TailSprite;
+		tail.Rects[0].Color = tailColor;
+		tail.Rects[1].Color = tailColor;
+		tail.Rects[2].Color = tailColor;
+
+		this.DrawSprite(snake.Positions[snake.Positions.length - 1], tail);
 
 		//draw head
 		this.DrawSprite(snake.Head, snake.HeadSprite);
@@ -150,6 +169,13 @@ class Rect
 		this.Height = temp.Width;
 	}
 
+	FlipHorzAndVert()
+	{
+		var temp = this.Clone();
+		this.X = board.PixelsPerSquare - (temp.X + temp.Width);
+		this.Y = board.PixelsPerSquare - (temp.Y + temp.Height);
+	}
+
 	Clone()
 	{
 		return new Rect(this.X, this.Y, this.Width, this.Height, this.Color);
@@ -181,6 +207,14 @@ class Sprite
 		for (var i = 0; i < this.Rects.length; i++)
 		{
 			this.Rects[i].RotateCounterClockwise();
+		}
+	}
+
+	FlipHorzAndVert()
+	{
+		for (var i = 0; i < this.Rects.length; i++)
+		{
+			this.Rects[i].FlipHorzAndVert();
 		}
 	}
 }
