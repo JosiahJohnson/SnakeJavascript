@@ -63,25 +63,32 @@ class Board
 
 	DrawSnake()
 	{
-		//get color for head and body
-		var color = snake.GetColor();
-		snake.HeadSprite.Rects[0].Color = color;
-		snake.HeadSprite.Rects[1].Color = color;
+		//get color index for body
+		var bodyIndex = snake.ColorIndex - 1;
+
+		if (bodyIndex < 0)
+			bodyIndex = snake.Colors.length - 1;
+
+		//get head color
+		var headColor = snake.GetColor();
+		snake.HeadSprite.Rects[0].Color = headColor;
+		snake.HeadSprite.Rects[1].Color = headColor;
 
 		//draw body. only need to draw the position after head
 		this.ClearSquare(snake.Positions[1]);
+		var bodyColor = snake.Colors[bodyIndex];
 
 		if (snake.ChangedDirection)
 		{
 			var curve = snake.GetCurveSprite();
-			curve.Rects[0].Color = color;
-			curve.Rects[1].Color = color;
-			curve.Rects[2].Color = color;
+			curve.Rects[0].Color = bodyColor;
+			curve.Rects[1].Color = bodyColor;
+			curve.Rects[2].Color = bodyColor;
 
 			this.DrawSprite(snake.Positions[1], curve);
 		}
 		else
-			this.DrawSquare(snake.Positions[1], color);
+			this.DrawSquare(snake.Positions[1], bodyColor);
 
 		//draw tail
 		this.ClearSnakeTail();

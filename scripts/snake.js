@@ -64,7 +64,7 @@ class Snake
 		{
 			var tailIndex = this.ColorIndex;
 
-			for (var i = 0; i < (this.Positions.length - 1); i++)
+			for (var i = 0; i < this.Positions.length; i++)
 			{
 				tailIndex--;
 
